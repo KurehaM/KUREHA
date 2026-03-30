@@ -1,0 +1,474 @@
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>VALÉNOΛ —  Model Agency</title>
+
+<link rel="alternate" hreflang="ja" href="https://valenoa-model-agency.com/ja/" />
+<link rel="alternate" hreflang="en" href="https://valenoa-model-agency.com/en/" />
+<link rel="alternate" hreflang="fr" href="https://valenoa-model-agency.com/fr/" />
+<link rel="alternate" hreflang="x-default" href="https://valenoa-model-agency.com/" />
+
+<meta name="description" content="VALÉNOΛ Model Agency official website. Luxury fashion model agency portfolio and visual identity.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://valenoa-model-agency.com/">
+
+<!-- OGP -->
+<meta property="og:title" content="VALÉNOΛ Model Agency">
+<meta property="og:description" content="Luxury model agency visual experience.">
+<meta property="og:image" content="https://valenoa-model-agency.com/images/ogp.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://valenoa-model-agency.com/">
+
+<!-- favicon -->
+<link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png">
+
+<!-- =========================
+セキュリティヘッダー
+========================= -->
+
+<meta http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+img-src 'self' data: blob:;
+media-src 'self' blob:;
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.gstatic.com;
+connect-src 'self';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+upgrade-insecure-requests;
+">
+
+<meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+<meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
+
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<meta http-equiv="Permissions-Policy"
+content="
+camera=(),
+microphone=(),
+geolocation=(),
+payment=(),
+usb=(),
+accelerometer=(),
+gyroscope=(),
+magnetometer=(),
+fullscreen=(self)
+">
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Organization",
+ "name":"VALÉNOΛ",
+ "alternateName":"VALENOA Model Agency",
+ "url":"https://valenoa-model-agency.com/",
+ "logo":"https://valenoa-model-agency.com/images/logo.png",
+ "sameAs":[
+   "https://www.instagram.com/valenoa"
+ ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9RQYG0QC7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z9RQYG0QC7');
+</script>
+<style>
+.mask-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(106, 106, 106, 0.504); /* 赤50% */
+  z-index: -1; /* 背景動画より上、文字より下 */
+}
+.background-index{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;      /* ← 高さも画面いっぱい */
+  object-fit: cover;  /* ← 画面いっぱいに最適化 */
+  z-index: -3;
+}
+
+
+  :root{
+    --bg:#08070a;
+    --gold1:#f7e7c6;
+    --gold2:#d4b56a;
+    --gold3:#fbe8b8;
+  }
+
+  html,body{
+    height:100%; margin:0;
+    font-family: "Didot", "Baskerville", "Times New Roman", serif;
+    overflow: hidden; /* ← 縦スクロールしない */
+  }
+  body.fade-out {
+  opacity: 0;
+  background: #000 !important; /* ← フェードアウト中だけ黒 */
+}
+
+  .stage{
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:4vh 4vw;
+    
+  }
+
+  .card{
+    width:min(880px, 92vw);
+    padding: clamp(26px, 3.5vh, 38px);
+    /* border-radius:18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.006)); */
+    /* box-shadow: 0 8px 32px rgba(0,0,0,0.65); */
+    position:relative;
+  }
+
+  .logo-wrap{
+    display:flex; align-items:center; justify-content:center;
+    padding: clamp(18px, 3vh, 36px) 0;
+    position:relative;
+  }
+
+  svg{ width:100%; height:auto; display:block; }
+
+  /* 細くクラシックな描線 */
+  .stroke-layer{
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .engrave{
+    fill: rgba(0,0,0,0.14);
+    transform: translateY(4%);
+    filter: blur(4px);
+  }
+
+  .fill-layer{
+    fill-opacity: 0; /* ← stroke 完了まで完全に透明 */
+    transform-origin: center;
+  }
+
+  @keyframes strokeReveal {
+    from { stroke-dashoffset: var(--len); }
+    to   { stroke-dashoffset: 0; }
+  }
+
+  @keyframes fillFade {
+    from { fill-opacity:0; transform:translateY(6px) scale(1.02); }
+    to   { fill-opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .anim-draw{ animation: strokeReveal var(--draw-time) cubic-bezier(.22,.9,.3,1) forwards; }
+  .anim-fill{ animation: fillFade 420ms ease-out forwards; }
+
+  .tag{
+    text-align:center;
+    font-family: "Helvetica Neue", "Yu Gothic UI", sans-serif;
+    /* background-color: red; */
+    font-weight: 300;
+    letter-spacing: 15px;
+    margin-top:-80px;
+    color:rgba(255,255,255,0.58);
+    font-size:16px;
+  }
+  .seo-h1{
+position:absolute;
+left:-9999px;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+}
+
+  .seo-h2{
+position:absolute;
+left:-9999px;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+}
+
+ @media (max-width: 768px) {
+
+  #strokeText,
+  #fillText,
+  .engrave{
+    font-size: 182px;
+  }
+.tag{
+   text-align:center;
+  width: max-content;
+margin-top:-30px;
+font-size:13px;
+letter-spacing: 10px;
+/* background-color: red; */
+}
+
+
+
+} 
+</style>
+
+</head>
+
+<body>
+<h1 class="seo-h1">
+VALENOA Model Agency – International Fashion Model Agency in Paris and Tokyo
+</h1>
+<h2 class="seo-h2">
+Luxury fashion model agency representing international models
+</h2>
+<div style="position:absolute;left:-9999px">
+
+<a href="https://valenoa-model-agency.com/ja/">日本語</a>
+<a href="https://valenoa-model-agency.com/en/">English</a>
+<a href="https://valenoa-model-agency.com/fr/">Français</a>
+
+</div>
+  <!-- <div class="mask-overlay"></div> -->
+  <div class="video-background-index">
+      <video class="background-index" src="/movie/backgraund-index.mov#t=1.5" autoplay loop muted playsinline></video>
+      <!-- <video class="background-top-mobile" src="/movie/background-mobile.mov" autoplay loop muted playsinline></video> -->
+    </div>
+<div class="stage">
+  <div class="card">
+
+    <div class="logo-wrap">
+      <svg id="logoSVG" viewBox="0 0 1200 240">
+
+        <defs>
+          <linearGradient id="goldStroke" x1="0" x2="1">
+            <stop offset="0%" stop-color="#fff9e6"/>
+            <stop offset="35%" stop-color="#f7e7c6"/>
+            <stop offset="65%" stop-color="#d4b56a"/>
+            <stop offset="100%" stop-color="#fce9c0"/>
+          </linearGradient>
+
+          <linearGradient id="champagne" x1="0" x2="1">
+            <stop offset="0%" stop-color="#fdf7ed"/>
+            <stop offset="48%" stop-color="#f3e4c8"/>
+            <stop offset="100%" stop-color="#e8d9b2"/>
+          </linearGradient>
+        </defs>
+
+   <text class="engrave"
+          x="50%" y="60%" text-anchor="middle"
+          font-size="112" font-weight="500"
+          font-family='"Didot","Baskerville","Times New Roman",serif'>
+          VALÉNOΛ
+        </text>
+
+        <!-- 文字ごとに tspan に分けた stroke -->
+        <text id="strokeText" class="stroke-layer"
+          x="50%" y="56%" text-anchor="middle"
+          font-size="112" font-weight="500"
+          stroke="url(#goldStroke)" fill="none">
+          <tspan>V</tspan><tspan>A</tspan><tspan>L</tspan><tspan>É</tspan><tspan>N</tspan><tspan>O</tspan><tspan>Λ</tspan>
+        </text>
+
+        <!-- 同じく文字ごとに tspan -->
+        <text id="fillText" class="fill-layer"
+          x="50%" y="56%" text-anchor="middle"
+          font-size="112" font-weight="500"
+          fill="url(#champagne)">
+          <tspan>V</tspan><tspan>A</tspan><tspan>L</tspan><tspan>É</tspan><tspan>N</tspan><tspan>O</tspan><tspan>Λ</tspan>
+        </text>
+
+      </svg>
+    </div>
+
+    <div class="tag">VALÉNOΛ MODEL AGENCY</div>
+  </div>
+</div>
+
+<style>
+  /* 既存スタイルに追加 */
+  body {
+    opacity: 1;
+    transition: opacity 1s ease; /* フェードアウト用 */
+  }
+  body.fade-out {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // Topリンククリック用（既存）
+  const fillText = document.getElementById("fillText");
+  fillText.style.cursor = "pointer";
+  fillText.addEventListener("click", () => {
+    fadeToTop();
+  });
+
+  (function(){
+    const s = document.getElementById("strokeText");
+    const f = document.getElementById("fillText");
+
+    const drawTime = 4500;  // stroke 描画時間
+    document.documentElement.style.setProperty("--draw-time", drawTime+"ms");
+
+    function start(){
+      let len = 2400;
+      try{ len = s.getComputedTextLength(); }catch(e){}
+      document.documentElement.style.setProperty("--len", len);
+      s.style.strokeDasharray = len;
+      s.style.strokeDashoffset = len;
+
+      void s.offsetWidth;
+      s.classList.add("anim-draw");
+
+      // stroke 完全描画後に fill アニメーション
+      setTimeout(()=> f.classList.add("anim-fill"), drawTime * 0.6);
+    }
+
+    if(document.fonts) document.fonts.ready.then(start);
+    else setTimeout(start, 200);
+  })();
+ 
+  // -------------------------------
+  // フェードアウトしてTop.htmlに遷移する関数
+  function fadeToTop() {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = "Top.html";
+    }, 1000); 
+  }
+
+  // ページ読み込みから5秒後に自動遷移
+  setTimeout(fadeToTop, 5000);
+  
+  // ーーーーークリック防止ーーーーーーーーーーーーーーーーーーーーー
+
+document.addEventListener("DOMContentLoaded", function(){
+
+/* ===============================
+右クリック禁止
+=============================== */
+document.addEventListener("contextmenu", function(e){
+  if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+    e.preventDefault();
+  }
+});
+
+/* ===============================
+ドラッグ保存禁止
+=============================== */
+document.addEventListener("dragstart", function(e){
+  if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+    e.preventDefault();
+  }
+});
+
+/* ===============================
+コピー禁止
+=============================== */
+document.addEventListener("copy", function(e){
+
+  if(
+    e.target.tagName==="IMG" ||
+    e.target.tagName==="VIDEO"
+  ){
+    e.preventDefault();
+  }
+
+});
+/* ===============================
+キーボードショートカット禁止
+=============================== */
+document.addEventListener("keydown", function(e){
+
+  if(
+    e.key==="F12" ||
+    e.key==="PrintScreen" ||
+
+    (e.ctrlKey && e.key==="s") ||
+    (e.ctrlKey && e.key==="u") ||
+    (e.ctrlKey && e.key==="c") ||
+    (e.ctrlKey && e.key==="a") ||
+    (e.ctrlKey && e.key==="p") ||
+
+    (e.ctrlKey && e.shiftKey && e.key==="I") ||
+    (e.ctrlKey && e.shiftKey && e.key==="J") ||
+    (e.ctrlKey && e.shiftKey && e.key==="C")
+  ){
+    e.preventDefault();
+    return false;
+  }
+
+});
+
+/* ===============================
+PrintScreen対策
+=============================== */
+
+document.addEventListener("keyup", function(e){
+
+  if(e.key === "PrintScreen"){
+
+    navigator.clipboard.writeText("");
+
+    alert("Screenshots are not permitted on this portfolio.");
+
+  }
+
+});
+
+/* ===============================
+DevTools検知
+=============================== */
+
+setInterval(function(){
+
+  const widthThreshold = window.outerWidth - window.innerWidth > 160;
+  const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+  if(widthThreshold || heightThreshold){
+
+    document.body.innerHTML="";
+
+    alert("Developer tools are not allowed.");
+
+  }
+
+},2000);
+
+/* ===============================
+動画ダウンロード防止
+=============================== */
+
+document.querySelectorAll("video").forEach(video=>{
+  video.controlsList="nodownload";
+  video.disablePictureInPicture=true;
+});
+
+/* ===============================
+テキスト選択禁止
+=============================== */
+
+document.body.style.userSelect="none";
+
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valenoa-model-agency.com/sitemap.xml
