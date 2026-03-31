@@ -270,74 +270,74 @@ submitBtn?.addEventListener("click", async (e) => {
 // 右クリック禁止
 // =============================== 
 
-document.addEventListener("contextmenu", function(e){
-  e.preventDefault();
-});
+// document.addEventListener("contextmenu", function(e){
+//   e.preventDefault();
+// });
 
 
 //===============================
 //ドラッグ保存禁止
 //=============================== 
 
-document.addEventListener("dragstart", function(e){
-  if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
-    e.preventDefault();
-  }
-});
+// document.addEventListener("dragstart", function(e){
+//   if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+//     e.preventDefault();
+//   }
+// });
 
 
 //===============================
 //コピー禁止
 //===============================
 
-document.addEventListener("copy", function(e){
-  e.preventDefault();
-});
+// document.addEventListener("copy", function(e){
+//   e.preventDefault();
+// });
 
 
 // ===============================
 //キーボードショートカット禁止
 //=============================== 
 
-document.addEventListener("keydown", function(e){
+// document.addEventListener("keydown", function(e){
 
-  if(
-    e.key==="F12" ||
-    e.key==="PrintScreen" ||
+//   if(
+//     e.key==="F12" ||
+//     e.key==="PrintScreen" ||
 
-    (e.ctrlKey && e.key==="s") ||
-    (e.ctrlKey && e.key==="u") ||
-    (e.ctrlKey && e.key==="c") ||
-    (e.ctrlKey && e.key==="a") ||
-    (e.ctrlKey && e.key==="p") ||
+//     (e.ctrlKey && e.key==="s") ||
+//     (e.ctrlKey && e.key==="u") ||
+//     (e.ctrlKey && e.key==="c") ||
+//     (e.ctrlKey && e.key==="a") ||
+//     (e.ctrlKey && e.key==="p") ||
 
-    (e.ctrlKey && e.shiftKey && e.key==="I") ||
-    (e.ctrlKey && e.shiftKey && e.key==="J") ||
-    (e.ctrlKey && e.shiftKey && e.key==="C")
+//     (e.ctrlKey && e.shiftKey && e.key==="I") ||
+//     (e.ctrlKey && e.shiftKey && e.key==="J") ||
+//     (e.ctrlKey && e.shiftKey && e.key==="C")
 
-  ){
-    e.preventDefault();
-    return false;
-  }
+//   ){
+//     e.preventDefault();
+//     return false;
+//   }
 
-});
+// });
 
 
 // ===============================
 //PrintScreen対策
 //=============================== */
 
-document.addEventListener("keyup", function(e){
+// document.addEventListener("keyup", function(e){
 
-  if(e.key === "PrintScreen"){
+//   if(e.key === "PrintScreen"){
 
-    navigator.clipboard.writeText("");
+//     navigator.clipboard.writeText("");
 
-    alert("Screenshots are not permitted on this portfolio.");
+//     alert("Screenshots are not permitted on this portfolio.");
 
-  }
+//   }
 
-});
+// });
 
 
 //===============================
@@ -364,29 +364,29 @@ document.addEventListener("keyup", function(e){
 //画像URL直アクセス防止
 //=============================== //
 
-document.querySelectorAll("img").forEach(img=>{
+// document.querySelectorAll("img").forEach(img=>{
 
-  img.addEventListener("contextmenu",e=>e.preventDefault());
+//   img.addEventListener("contextmenu",e=>e.preventDefault());
 
-});
+// });
 
 
 // ===============================
 //動画ダウンロード防止
 //============================== 
 
-document.querySelectorAll("video").forEach(video=>{
+// document.querySelectorAll("video").forEach(video=>{
 
-  video.controlsList="nodownload";
+//   video.controlsList="nodownload";
 
-  video.disablePictureInPicture=true;
+//   video.disablePictureInPicture=true;
 
-});
+// });
 
 
 ///===============================
 //テキスト選択禁止
 //============================== 
 
-document.body.style.userSelect="none";
-});
+// document.body.style.userSelect="none";
+// });

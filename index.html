@@ -359,79 +359,79 @@ Luxury fashion model agency representing international models
   
   // ーーーーークリック防止ーーーーーーーーーーーーーーーーーーーーー
 
-document.addEventListener("DOMContentLoaded", function(){
+// document.addEventListener("DOMContentLoaded", function(){
 
 /* ===============================
 右クリック禁止
 =============================== */
-document.addEventListener("contextmenu", function(e){
-  if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
-    e.preventDefault();
-  }
-});
+// document.addEventListener("contextmenu", function(e){
+//   if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+//     e.preventDefault();
+//   }
+// });
 
 /* ===============================
 ドラッグ保存禁止
 =============================== */
-document.addEventListener("dragstart", function(e){
-  if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
-    e.preventDefault();
-  }
-});
+// document.addEventListener("dragstart", function(e){
+//   if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+//     e.preventDefault();
+//   }
+// });
 
 /* ===============================
 コピー禁止
 =============================== */
-document.addEventListener("copy", function(e){
+// document.addEventListener("copy", function(e){
 
-  if(
-    e.target.tagName==="IMG" ||
-    e.target.tagName==="VIDEO"
-  ){
-    e.preventDefault();
-  }
+//   if(
+//     e.target.tagName==="IMG" ||
+//     e.target.tagName==="VIDEO"
+//   ){
+//     e.preventDefault();
+//   }
 
-});
+// });
 /* ===============================
 キーボードショートカット禁止
 =============================== */
-document.addEventListener("keydown", function(e){
+// document.addEventListener("keydown", function(e){
 
-  if(
-    e.key==="F12" ||
-    e.key==="PrintScreen" ||
+//   if(
+//     e.key==="F12" ||
+//     e.key==="PrintScreen" ||
 
-    (e.ctrlKey && e.key==="s") ||
-    (e.ctrlKey && e.key==="u") ||
-    (e.ctrlKey && e.key==="c") ||
-    (e.ctrlKey && e.key==="a") ||
-    (e.ctrlKey && e.key==="p") ||
+//     (e.ctrlKey && e.key==="s") ||
+//     (e.ctrlKey && e.key==="u") ||
+//     (e.ctrlKey && e.key==="c") ||
+//     (e.ctrlKey && e.key==="a") ||
+//     (e.ctrlKey && e.key==="p") ||
 
-    (e.ctrlKey && e.shiftKey && e.key==="I") ||
-    (e.ctrlKey && e.shiftKey && e.key==="J") ||
-    (e.ctrlKey && e.shiftKey && e.key==="C")
-  ){
-    e.preventDefault();
-    return false;
-  }
+//     (e.ctrlKey && e.shiftKey && e.key==="I") ||
+//     (e.ctrlKey && e.shiftKey && e.key==="J") ||
+//     (e.ctrlKey && e.shiftKey && e.key==="C")
+//   ){
+//     e.preventDefault();
+//     return false;
+//   }
 
-});
+// });
 
 /* ===============================
 PrintScreen対策
 =============================== */
 
-document.addEventListener("keyup", function(e){
+// document.addEventListener("keyup", function(e){
 
-  if(e.key === "PrintScreen"){
+//   if(e.key === "PrintScreen"){
 
-    navigator.clipboard.writeText("");
+//     navigator.clipboard.writeText("");
 
-    alert("Screenshots are not permitted on this portfolio.");
+//     alert("Screenshots are not permitted on this portfolio.");
 
-  }
+//   }
 
-});
+// });
 
 /* ===============================
 DevTools検知
@@ -456,18 +456,18 @@ DevTools検知
 動画ダウンロード防止
 =============================== */
 
-document.querySelectorAll("video").forEach(video=>{
-  video.controlsList="nodownload";
-  video.disablePictureInPicture=true;
-});
+// document.querySelectorAll("video").forEach(video=>{
+//   video.controlsList="nodownload";
+//   video.disablePictureInPicture=true;
+// });
 
 /* ===============================
 テキスト選択禁止
 =============================== */
 
-document.body.style.userSelect="none";
+// document.body.style.userSelect="none";
 
-});
+// });
 
 </script>
 </body>
