@@ -262,7 +262,8 @@ submitBtn?.addEventListener("click", async (e) => {
 });
 
   // goBack関数をグローバルにも出す（HTMLから呼び出し可能に）
-  window.goBack = goBack;
+window.goBack = goBack;
+
 // ーーーーーーーーーーーーーーーーーーーーーーーーーー
 
 
@@ -325,7 +326,7 @@ submitBtn?.addEventListener("click", async (e) => {
 
 // ===============================
 //PrintScreen対策
-//=============================== */
+//=============================== 
 
 // document.addEventListener("keyup", function(e){
 
@@ -362,7 +363,7 @@ submitBtn?.addEventListener("click", async (e) => {
 
 //===============================
 //画像URL直アクセス防止
-//=============================== //
+//=============================== 
 
 // document.querySelectorAll("img").forEach(img=>{
 
@@ -389,4 +390,5 @@ submitBtn?.addEventListener("click", async (e) => {
 //============================== 
 
 // document.body.style.userSelect="none";
-// });
+
+});
