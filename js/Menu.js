@@ -217,7 +217,7 @@ submitBtn?.addEventListener("click", async (e) => {
     "送信中...";
 
   const googleFormURL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSe7iwNuFW7n85vMt_LL9mSw5ZxnGMbw496keNgQh5KhMXYf9w/formResponse";
+    "https://forms.gle/ym2JmRmHnqscJsnn6";
 
   const formData = new FormData();
   formData.append("entry.549184934", form.company.value);
