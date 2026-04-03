@@ -216,27 +216,30 @@ submitBtn?.addEventListener("click", async (e) => {
     lang === "fr" ? "Envoi en cours..." :
     "送信中...";
 
-const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdSlrJ2jZyTme5b56beF-EoVml2Qdqy2cprM1IF1eCmliNTEA/formResponse";
+  // GoogleフォームURL
+  const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdSlrJ2jZyTme5b56beF-EoVml2Qdqy2cprM1IF1eCmliNTEA/formResponse";
 
-const formData = new FormData();
-formData.append("entry.1910537145", form.company.value);
-formData.append("entry.1242423353", form.name.value);
-formData.append("entry.1332481730", form.email.value);
-formData.append("entry.2104000093", form.phone.value);
-formData.append("entry.861753871", form.jobtype.value);
-formData.append("entry.1506127604", form.onsite.value);
-formData.append("entry.1594287664", form.subject.value);
-formData.append("entry.394413404", form.message.value);
-formData.append("entry.2022988492", lang);
+  const formData = new FormData();
+  formData.append("entry.1910537145", String(form.company.value));
+  formData.append("entry.1242423353", String(form.name.value));
+  formData.append("entry.1332481730", String(form.email.value));
+  formData.append("entry.2104000093", String(form.phone.value));
+  formData.append("entry.861753871", String(form.jobtype.value));
+  formData.append("entry.1506127604", String(form.onsite.value));
+  formData.append("entry.1594287664", String(form.subject.value));
+  formData.append("entry.394413404", String(form.message.value));
 
-try {
+  // 言語欄は必ず ja / en / fr 文字列を送る
+  formData.append("entry.2022988492", String(lang));
 
-await fetch(googleFormURL, {
-  method: "POST",
-  mode: "no-cors",
-  body: formData
-});
+  try {
+    await fetch(googleFormURL, {
+      method: "POST",
+      mode: "no-cors", // 送信確認は Network タブで
+      body: formData
+    });
 
+    // 送信後サンクスページ
     const thxPagePath = {
       ja: "/thx.html",
       en: "/en/thx.html",
@@ -245,8 +248,7 @@ await fetch(googleFormURL, {
 
     window.location.href = thxPagePath[lang];
 
-  } 
-  catch (error) {
+  } catch (error) {
     alert({
       ja: "送信に失敗しました。時間をおいて再度お試しください。",
       en: "Failed to send. Please try again later.",
@@ -259,7 +261,6 @@ await fetch(googleFormURL, {
       lang === "fr" ? "Envoyer" :
       "送信";
   }
-
 });
 
   // goBack関数をグローバルにも出す（HTMLから呼び出し可能に）
