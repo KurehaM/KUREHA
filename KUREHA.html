@@ -337,6 +337,7 @@ title="KUREHA fashion model background video">
 
     
     <form id="contactForm" autocomplete="on">
+      <input type="hidden" name="language" id="languageInput" value="ja">
       <!-- <input class="bot-fix" type="text" name="website" style="display:none"> -->
       <div class="form-group">
         <label for="company" class="lang-ja">会社名<span>*</span></label>
@@ -532,6 +533,19 @@ console.clear();
 },1000);
 
 
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // URLの ?lang=xx を取得（例: /KUREHA.html?lang=en）
+  const urlParams = new URLSearchParams(window.location.search);
+  const lang = urlParams.get("lang") || "ja"; // デフォルトは日本語
+
+  // hidden input に値をセット
+  const langInput = document.getElementById("languageInput");
+  if (langInput) {
+    langInput.value = lang;
+  }
+});
 </script>
 <script src="/js/Menu.js" defer></script>
 </body>
