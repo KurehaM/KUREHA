@@ -216,27 +216,26 @@ submitBtn?.addEventListener("click", async (e) => {
     lang === "fr" ? "Envoi en cours..." :
     "送信中...";
 
-  const googleFormURL =
-    "https://forms.gle/ym2JmRmHnqscJsnn6";
+const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdSlrJ2jZyTme5b56beF-EoVml2Qdqy2cprM1IF1eCmliNTEA/formResponse";
 
-  const formData = new FormData();
-  formData.append("entry.549184934", form.company.value);
-  formData.append("entry.241630450", form.name.value);
-  formData.append("entry.1348806247", form.email.value);
-  formData.append("entry.1938954068", form.phone.value);
-  formData.append("entry.1133594855", form.jobtype.value);
-  formData.append("entry.1106166738", form.onsite.value);
-  formData.append("entry.1901396001", form.subject.value);
-  formData.append("entry.319458182", form.message.value);
+const formData = new FormData();
+formData.append("entry.1910537145", form.company.value);
+formData.append("entry.1242423353", form.name.value);
+formData.append("entry.1332481730", form.email.value);
+formData.append("entry.2104000093", form.phone.value);
+formData.append("entry.861753871", form.jobtype.value);
+formData.append("entry.1506127604", form.onsite.value);
+formData.append("entry.1594287664", form.subject.value);
+formData.append("entry.394413404", form.message.value);
+formData.append("entry.2022988492", lang);
 
-  formData.append("entry.1031529061", lang);
+try {
 
-  try {
-    await fetch(googleFormURL, {
-      method: "POST",
-      mode: "no-cors",
-      body: formData
-    });
+await fetch(googleFormURL, {
+  method: "POST",
+  mode: "no-cors",
+  body: formData
+});
 
     const thxPagePath = {
       ja: "/thx.html",
@@ -246,7 +245,8 @@ submitBtn?.addEventListener("click", async (e) => {
 
     window.location.href = thxPagePath[lang];
 
-  } catch (error) {
+  } 
+  catch (error) {
     alert({
       ja: "送信に失敗しました。時間をおいて再度お試しください。",
       en: "Failed to send. Please try again later.",
@@ -259,6 +259,7 @@ submitBtn?.addEventListener("click", async (e) => {
       lang === "fr" ? "Envoyer" :
       "送信";
   }
+
 });
 
   // goBack関数をグローバルにも出す（HTMLから呼び出し可能に）
