@@ -43,11 +43,23 @@
  "image":"https://valenoa-model-agency.com/images/og-image.jpg",
  "gender":"Female",
 "nationality":"Japanese",
-"homeLocation":"Tokyo, Japan",
+"homeLocation":{
+  "@type":"Place",
+  "name":"Tokyo, Japan"
+},
 "areaServed":[
-  "Japan",
-  "France",
-  "Europe"
+  {
+    "@type":"Country",
+    "name":"Japan"
+  },
+  {
+    "@type":"Country",
+    "name":"France"
+  },
+  {
+    "@type":"Place",
+    "name":"Europe"
+  }
 ],
 "sameAs":[
   "https://www.instagram.com/_crayon99/"
@@ -118,7 +130,7 @@ onload="this.onload=null;this.rel='stylesheet'">
 content="
 default-src 'self';
 script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net;
-connect-src 'self' https://www.google-analytics.com;
+connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com;
 style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;
 img-src 'self' data: https:;
 font-src 'self' https://fonts.gstatic.com data:;
@@ -215,6 +227,19 @@ console.clear();
 
 
 </script>
+<script>
+window.addEventListener('load', () => {
+  gtag('event', 'top_page_loaded');
+
+  const bgVideo = document.querySelector('.background');
+  if(bgVideo){
+    bgVideo.addEventListener('play', () => {
+      gtag('event', 'top_video_play');
+    });
+  }
+});
+</script>
+
 <script src="/js/Top.js" defer></script>
 </body>
 </html>

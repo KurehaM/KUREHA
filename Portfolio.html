@@ -20,8 +20,7 @@
 <meta property="og:url" content="https://valenoa-model-agency.com/Portfolio.html" />
   <meta property="og:type" content="website" />
   
-  <meta name="robots" content="index, follow">
-  
+
   <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png">
  <link rel="preload" href="https://cdn.jsdelivr.net/npm/destyle.css@3.0.2/destyle.css" as="style" onload="this.rel='stylesheet'">
@@ -33,14 +32,14 @@
 <link rel="preload" href="/css/style.css" as="style">
 <link rel="stylesheet" href="/css/style.css" media="all">
 
-  <script type="application/ld+json">
+ <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "KUREHA",
   "jobTitle": "Fashion Model",
   "image": "https://kureha.jp/images/kureha.jpg",
-  "url": "https://kureha.jp/",
+  "url": "https://valenoa-model-agency.com/",
   "sameAs": [
     "https://www.instagram.com/_crayon99/"
   ],
@@ -56,7 +55,7 @@
  "@context":"https://schema.org",
  "@type":"WebSite",
  "name":"VALÉNOΛ Model Agency",
- "url":"https://valenoa-model-agency.com/"
+"url": "https://valenoa-model-agency.com/"
 }
 </script>
 <link rel="preload" as="fetch" href="/img.html" crossorigin>
@@ -66,10 +65,9 @@ content="
 default-src 'self';
 img-src 'self' data: blob:;
 media-src 'self' blob:;
-script-src 'self' 'unsafe-inline' blob:;
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
 font-src https://fonts.gstatic.com;
-connect-src 'self' https://www.google-analytics.com;
+connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com;
 script-src 'self' 'unsafe-inline' blob: https://www.googletagmanager.com;">
 <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
 <meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
@@ -250,6 +248,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalClose = document.getElementById("modalClose");
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
+  document.getElementById("link-concept")?.addEventListener("click", () => {
+  gtag('event', 'click_concept');
+});
+
+document.getElementById("link-career")?.addEventListener("click", () => {
+  gtag('event', 'click_career');
+});
+
+document.getElementById("link-portfolio")?.addEventListener("click", () => {
+  gtag('event', 'click_portfolio');
+});
 
   let itemsList = [];
   let currentIndex = 0;
@@ -327,15 +336,22 @@ document.addEventListener("wheel",(e)=>{
 
   function bindGalleryClick() {
     itemsList = [
-      ...galleryContainer.children,
-      ...thumbnailContainer.children
-    ];
+  ...new Map(
+    [...galleryContainer.children, ...thumbnailContainer.children]
+      .map(el => [(el.dataset.full || el.src), el])
+  ).values()
+];
 
     itemsList.forEach((el, idx) => {
-      el.onclick = () => {
-        currentIndex = idx;
-        openModal(idx);
-      };
+     el.onclick = () => {
+  currentIndex = idx;
+  openModal(idx);
+
+  gtag('event', 'open_modal', {
+    image_index: idx,
+    content_type: el.tagName
+  });
+};
     });
   }
 
@@ -362,9 +378,11 @@ document.addEventListener("wheel",(e)=>{
 }
 
   function closeModal() {
-    modal.classList.remove("show");
-    modalVideo.pause();
-  }
+  modal.classList.remove("show");
+  modalVideo.pause();
+
+  gtag('event', 'close_modal');
+}
 
   function changeModalImage(dir) {
     const max = itemsList.length;
@@ -374,8 +392,17 @@ document.addEventListener("wheel",(e)=>{
 
   modalClose.onclick = closeModal;
   modal.onclick = e => { if (e.target === modal) closeModal(); };
-  prevBtn.onclick = e => { e.stopPropagation(); changeModalImage(-1); };
-  nextBtn.onclick = e => { e.stopPropagation(); changeModalImage(1); };
+prevBtn.onclick = e => {
+  e.stopPropagation();
+  changeModalImage(-1);
+  gtag('event', 'modal_prev');
+};
+
+nextBtn.onclick = e => {
+  e.stopPropagation();
+  changeModalImage(1);
+  gtag('event', 'modal_next');
+};
 
   document.addEventListener("keydown", e => {
     if (!modal.classList.contains("show")) return;
@@ -387,13 +414,15 @@ document.addEventListener("wheel",(e)=>{
   /* ================= 表示切替 ================= */
 
   toggleBtn.addEventListener("click", () => {
-    horizontalGallery.classList.toggle("hidden");
-    thumbnailGallery.classList.toggle("hidden");
+  horizontalGallery.classList.toggle("hidden");
+  thumbnailGallery.classList.toggle("hidden");
 
-    const squareContainer = document.getElementById("squareContainer");
-    squareContainer.classList.toggle("two-by-two");
-    squareContainer.classList.toggle("one-row");
-  });
+  const squareContainer = document.getElementById("squareContainer");
+  squareContainer.classList.toggle("two-by-two");
+  squareContainer.classList.toggle("one-row");
+
+  gtag('event', 'toggle_gallery_view');
+});
 
   /* ================= img.html 読み込み ================= */
 
@@ -514,6 +543,30 @@ Horizontal Lazy Load
 </script>
 
 
+
+<script>
+/* GA4 Event Tracking */
+
+// Contact
+document.getElementById("link-contact")?.addEventListener("click", () => {
+  gtag('event', 'click_contact');
+});
+
+// Instagram
+document.querySelector(".instagram-link")?.addEventListener("click", () => {
+  gtag('event', 'click_instagram');
+});
+
+// Composition PDF
+document.querySelector(".composition")?.addEventListener("click", () => {
+  gtag('event', 'download_composition');
+});
+
+document.querySelector(".composition-portfolio")?.addEventListener("click", () => {
+  gtag('event', 'download_composition');
+});
+
+</script>
   <script src="/js/Menu.js" defer></script>
 </body>
 </html>
