@@ -231,35 +231,21 @@
 
     <!-- Security -->
 
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta
-      http-equiv="Referrer-Policy"
-      content="strict-origin-when-cross-origin"
-    />
-    <!-- ーーーーーーーーCSP-ーーーーー------ -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-default-src 'self';
-script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net;
-connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com;
-style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com;
-img-src 'self' data: https:;
-font-src 'self' https://fonts.gstatic.com data:;
-media-src 'self';
-object-src 'none';
-base-uri 'self';
-form-action 'self';
-"
-    />
-    <!-- Google Analytics -->
+    <!-- CSP -->
+
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
+/>
+
+<!-- Google Analytics -->
 
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-Z9RQYG0QC7"
     ></script>
 
-    <script defer>
+    <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -344,7 +330,7 @@ form-action 'self';
     <!-- ホワイトフェード -->
     <!-- <div class="white-fade"></div> -->
 
-    <script defer>
+    <script>
       window.addEventListener("load", () => {
         // 全体フェードイン
         document.body.classList.add("page-loaded");
@@ -365,7 +351,7 @@ form-action 'self';
         }, 2600);
       });
     </script>
-    <script defer>
+    <script>
       window.addEventListener("DOMContentLoaded", () => {
         const kurehaTitle = document.getElementById("kureha-title");
 
