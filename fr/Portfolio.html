@@ -11,58 +11,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- ーーーーーーーーCSP-ーーーーー------ -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-default-src 'self';
-base-uri 'self';
-object-src 'none';
-form-action 'self';
-
-img-src 'self' data: blob:;
-media-src 'self' blob:;
-
-style-src 'self' 'unsafe-inline'
-https://fonts.googleapis.com
-https://cdn.jsdelivr.net;
-
-font-src 'self'
-https://fonts.gstatic.com;
-
-connect-src 'self'
-https://www.google-analytics.com
-https://region1.google-analytics.com
-https://analytics.google.com;
-
-script-src 'self' 'unsafe-inline'
-https://www.googletagmanager.com
-https://www.google-analytics.com;
-
-upgrade-insecure-requests;
-"
-    />
-
-    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-
-    <meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless" />
-
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-    <meta
-      http-equiv="Permissions-Policy"
-      content="
-camera=(),
-microphone=(),
-geolocation=(),
-payment=(),
-usb=(),
-magnetometer=(),
-accelerometer=(),
-gyroscope=(),
-fullscreen=(self)
-"
-    />
+    <!-- CSP -->
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; upgrade-insecure-requests;"
+/>
 
     <title>
       KUREHA｜Mannequin Japonaise entre Tokyo et Paris | Portfolio Officiel |
@@ -221,7 +174,6 @@ fullscreen=(self)
       }
     </script>
 
-    <link rel="preload" as="fetch" href="/img.html" crossorigin="anonymous" />
 
     <!-- Google tag -->
     <script
@@ -266,7 +218,6 @@ fullscreen=(self)
       <nav
         class="side-menu"
         id="sideMenu"
-        role="navigation"
         aria-label="menu latéral"
       >
         <a href="/index.html?lang=fr">
@@ -432,18 +383,18 @@ fullscreen=(self)
         </div>
 
         <!-- Toggle Button -->
-        <button
-          class="view-toggle-btn"
-          id="toggleView"
-          aria-label="Changer l’affichage de la galerie"
-        >
-          <div class="square-container one-row" id="squareContainer">
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-          </div>
-        </button>
+<button
+  class="view-toggle-btn"
+  id="toggleView"
+  aria-label="Toggle gallery view"
+>
+  <span class="square-container one-row" id="squareContainer">
+    <span class="square"></span>
+    <span class="square"></span>
+    <span class="square"></span>
+    <span class="square"></span>
+  </span>
+</button>
 
         <!-- Horizontal Gallery -->
         <div class="horizontal-gallery" id="horizontalGallery">
