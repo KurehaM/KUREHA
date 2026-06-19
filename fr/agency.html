@@ -78,54 +78,10 @@
 
     <!-- CSP -->
 
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-default-src 'self';
-img-src 'self' data: blob: https:;
-media-src 'self' blob:;
-script-src
-'self'
-https://www.googletagmanager.com
-https://www.google-analytics.com
-'sha256-ucw6wm398ALeycIqmHoGhCdq6Z+ibjWYpzdhNesXfHw='
-'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='
-'sha256-KZqkIWnHOCw7iHNZUX0CFdUS+J3s0wBUnHPqR9JlyLs=';
-
-style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-
-font-src 'self' https://fonts.gstatic.com;
-
-connect-src
-'self'
-https://www.google-analytics.com
-https://region1.google-analytics.com
-https://docs.google.com;
-
-base-uri 'self';
-
-form-action 'self' https://docs.google.com;
-
-upgrade-insecure-requests;
-"
-    />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-    <meta
-      http-equiv="Permissions-Policy"
-      content="
-camera=(),
-microphone=(),
-geolocation=(),
-payment=(),
-usb=(),
-accelerometer=(),
-gyroscope=(),
-magnetometer=(),
-fullscreen=(self)
-"
-    />
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'sha256-ucw6wm398ALeycIqmHoGhCdq6Z+ibjWYpzdhNesXfHw=' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://docs.google.com; base-uri 'self'; form-action 'self' https://docs.google.com; upgrade-insecure-requests;"
+/>
 
     <script type="application/ld+json">
       {
