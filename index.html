@@ -227,38 +227,26 @@
     </style>
     <!-- ーーーーーーーーCSP-ーーーーー------ -->
 
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
 default-src 'self';
 img-src 'self' data: blob: https:;
 media-src 'self' blob:;
-script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+script-src 'self' 'unsafe-inline'
+https://www.googletagmanager.com
+https://www.google-analytics.com
+https://static.cloudflareinsights.com;
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
 font-src 'self' https://fonts.gstatic.com;
-connect-src 'self' https://www.google-analytics.com;
+connect-src 'self'
+https://www.google-analytics.com
+https://cloudflareinsights.com;
 base-uri 'self';
 form-action 'self';
 upgrade-insecure-requests;
 "
-    />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-    <meta
-      http-equiv="Permissions-Policy"
-      content="
-camera=(),
-microphone=(),
-geolocation=(),
-payment=(),
-usb=(),
-accelerometer=(),
-gyroscope=(),
-magnetometer=(),
-fullscreen=(self)
-"
-    />
-
+/>
     <!-- -------------------------------- -->
     <script type="application/ld+json">
       {
