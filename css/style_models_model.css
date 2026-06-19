@@ -1,0 +1,995 @@
+.seo-h1,
+.seo-h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media only screen and (min-width: 769px) {
+  /* ------改行------------------ */
+  .br-min-non {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* ------改行------------------ */
+  .br-max-non {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .br-min-non400 {
+    display: none;
+  }
+}
+
+/* ////////////////////背景/////////////////////////////// */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* スクロールバー非表示 */
+  scrollbar-width: none;
+  /* Firefox */
+  font-family: "Didot", "Baskerville", "Times New Roman", serif;
+}
+
+/* Chrome / Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body.fade-out {
+  opacity: 0;
+  background: #000 !important;
+  /* ← フェードアウト中だけ黒 */
+}
+
+.fixed-ui {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#logoSVG {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* .fixed-ui {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+} */
+/* -------------------------------------------- */
+.language-buttons {
+  right: 6%;
+  top: 30px;
+  align-items: center;
+  /* text-align: end; */
+  margin-bottom: 30px;
+  position: fixed;
+  display: flex;
+  width: auto;
+  z-index: 1005;
+}
+
+.language-buttons span {
+  color: #ffffff;
+}
+
+.lang-Btn {
+  background-color: transparent;
+  width: auto;
+  color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 3px;
+  padding: 2px;
+  border: none;
+  margin: 0;
+  z-index: 1005;
+  transition: 0.5s ease;
+  text-decoration: none;
+}
+
+.lang-Btn:hover {
+  color: #666;
+  letter-spacing: 6px;
+  transition: 0.5s ease;
+}
+
+@media only screen and (max-width: 768px) {
+  .language-buttons {
+    right: 5%;
+    margin-top: 20px;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+  }
+
+  .lang-Btn {
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 0px;
+  }
+}
+
+/* ////////////////////背景Opacity/////////////////////////////// */
+.mask-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.504);
+  /* 赤50% */
+  z-index: -1;
+  /* 背景動画より上、文字より下 */
+}
+
+/* ////////////////////背景動画/////////////////////////////// */
+.background-index {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* ← 高さも画面いっぱい */
+  object-fit: cover;
+  /* ← 画面いっぱいに最適化 */
+  z-index: -3;
+}
+
+.video-background-index,
+.background-index,
+.mask-overlay {
+  pointer-events: none;
+}
+
+.global-menu,
+.global-menu a,
+.card,
+.logo-wrap {
+  pointer-events: auto;
+}
+
+/* ///////////////////////VALÉNOΛ文字//////////////////////////// */
+
+:root {
+  --bg: #08070a;
+  --gold1: #f7e7c6;
+  --gold2: #d4b56a;
+  --gold3: #fbe8b8;
+}
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .stage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  pointer-events: none;
+  z-index: 0;
+} */
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .card {
+  width: min(880px, 92vw);
+  padding: clamp(26px, 3.5vh, 38px);
+  position: relative;
+  pointer-events: auto;
+} */
+.logo-wrap {
+  width: min(88vw, 1100px);
+}
+
+/* .logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(18px, 3vh, 36px) 0;
+  position: relative;
+} */
+
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 細くクラシックな描線 */
+.stroke-layer {
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.engrave {
+  fill: rgba(0, 0, 0, 0.14);
+  transform: translateY(4%);
+  filter: blur(4px);
+}
+
+.fill-layer {
+  fill-opacity: 0;
+  opacity: 1;
+  transform-origin: center;
+}
+
+.fill-layer.filled {
+  fill-opacity: 1;
+}
+
+@keyframes strokeReveal {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillFade {
+  from {
+    fill-opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    fill-opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fill {
+  animation: fillFade 1200ms ease forwards;
+}
+
+.anim-draw {
+  animation: strokeReveal var(--draw-time) cubic-bezier(0.22, 0.9, 0.3, 1)
+    forwards;
+}
+
+.tag {
+  text-align: center;
+  font-family: "Helvetica Neue", "Yu Gothic UI", sans-serif;
+  /* background-color: red; */
+  font-weight: 300;
+  letter-spacing: 15px;
+  margin-top: -80px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .tag {
+    text-align: center;
+    /* font-family: "Helvetica Neue", "Yu Gothic UI", sans-serif; */
+    /* background-color: red; */
+    /* font-weight: 300; */
+    letter-spacing: 10px;
+    margin-top: -15px;
+    /* color: rgba(255, 255, 255, 0.58); */
+    font-size: 10px;
+  }
+}
+
+/* ////////////////////言語選択/////////////////////////////// */
+/* ////////////////////言語選択/////////////////////////////// */
+
+.lang-selector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 120px);
+  /* ← ロゴより少し下 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  letter-spacing: 5px;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1.2s ease,
+    visibility 1.2s ease,
+    transform 1.2s ease;
+}
+
+/* フェードイン後 */
+
+.lang-selector.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 100px);
+}
+
+.lang-selector button {
+  position: relative;
+  overflow: hidden;
+  font-family: "Shippori Mincho B1", serif;
+  opacity: 0.82;
+  width: 120px;
+  padding: 2.5px 0;
+  background: transparent;
+  color: white;
+  border: 0.5px solid rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  font-weight: 100;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition:
+    color 0.6s ease,
+    border-color 0.6s ease,
+    transform 0.4s ease;
+}
+
+.lang-selector button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  color: #ffffff;
+  opacity: 1;
+  transition: opacity 1s ease;
+  z-index: -1;
+}
+
+/* hover */
+.lang-selector button:hover {
+  background-color: #ffffff71;
+  /* opacity: 0.4; */
+  color: black;
+  transition: all 0.5s ease;
+}
+
+/* クリック時 */
+.lang-selector button.active {
+  color: rgba(1, 1, 1, 0.48);
+  background-color: #ffffff71;
+  /* opacity: 0.4; */
+  transition:
+    color 0.8s ease,
+    border-color 0.8s ease;
+}
+
+.lang-selector button.active::before {
+  transform: scaleX(1);
+}
+
+.top-lang-selector.fade-in {
+  display: flex !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .lang-selector {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 180px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    letter-spacing: 5px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 1.2s ease,
+      visibility 1.2s ease,
+      transform 1.2s ease;
+  }
+
+  /* フェードイン後 */
+
+  /* .lang-selector.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 50%);
+  } */
+
+  .lang-selector button {
+    position: relative;
+    overflow: hidden;
+    width: 90px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+}
+
+/* /////////////////////////////////////////
+GLOBAL MENU
+///////////////////////////////////////// */
+
+.global-menu {
+  position: fixed;
+  bottom: 42px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(28px, 7vw, 120px);
+  z-index: 999999;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1s ease,
+    transform 1s ease,
+    visibility 1s ease;
+}
+
+/* 表示 */
+
+.global-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* button と a を統一 */
+
+.global-menu button,
+.global-menu a {
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.58);
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+  letter-spacing: 13px;
+  cursor: pointer;
+  transition:
+    color 0.5s ease,
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+/* hover */
+
+.global-menu button:hover,
+.global-menu a:hover {
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+.index-copyright {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 200;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .global-menu {
+    flex-direction: column;
+    width: 100%;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    justify-content: center;
+    align-items: center;
+    gap: clamp(28px, 7vw, 120px);
+
+    text-shadow:
+      0 0 1px rgb(255, 255, 255),
+      0 0 6px rgb(255, 255, 255);
+  }
+
+  /* button と a を統一 */
+
+  .global-menu button,
+  .global-menu a {
+    font-size: 1.2rem;
+  }
+
+  .index-copyright {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 200;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    z-index: 9999;
+    pointer-events: none;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* -------------------------------------------------------- */
+/* models contents */
+/* -------------------------------------------------------- */
+
+/* =========================================
+
+MODELS GALLERY
+
+========================================= */
+/* =========================================
+ZOOM UI
+========================================= */
+.controls-container {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 999999;
+}
+
+.percentage-indicator {
+  background: rgba(255, 255, 255, 0.92);
+  color: #000;
+  padding: 11px 18px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-family: monospace;
+  backdrop-filter: blur(10px);
+}
+
+.switch {
+  display: flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px;
+  backdrop-filter: blur(8px);
+}
+
+.switch-button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 10px 14px;
+  letter-spacing: 2px;
+  font-size: 10px;
+  transition: 0.5s ease;
+}
+
+.switch-button:hover {
+  color: white;
+}
+
+.switch-button.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .controls-container {
+    position: fixed;
+    bottom: 80vh;
+    left: 50%;
+    width: 100vw;
+    justify-content: center;
+  }
+
+  .percentage-indicator {
+    padding: 8px 18px;
+    font-size: 11px;
+  }
+
+  .switch {
+    display: flex;
+    gap: 0px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2px;
+    backdrop-filter: blur(8px);
+  }
+
+  .switch-button {
+    padding: 6px 10px;
+    letter-spacing: 2px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+VIEWPORT
+========================================= */
+
+.viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.canvas-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  will-change: transform;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  perspective: 2000px;
+}
+
+/* =========================================
+GALLERY
+========================================= */
+.models-gallery {
+  position: relative;
+  width: max-content;
+  padding: 220px 180px 240px;
+}
+
+/* =========================================
+GRID
+========================================= */
+
+#models-container {
+  display: grid;
+  width: min(1600px, 100vw);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+  /* 通常表示 */
+  #models-container {
+    width: 100vw;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    padding-bottom: 200px;
+  }
+}
+
+/* =========================================
+CARD
+========================================= */
+/* =========================================
+CARD
+========================================= */
+
+.model-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 320 / 440;
+  overflow: hidden;
+  background: #000;
+  text-decoration: none;
+  opacity: 0;
+  isolation: isolate;
+  transform: translateY(60px) scale(0.96) rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition:
+    transform 2.2s cubic-bezier(0.19, 1, 0.22, 1),
+    filter 1.8s ease,
+    opacity 1.2s ease,
+    box-shadow 2s ease;
+  will-change: transform, filter;
+}
+
+/* show */
+
+.model-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* =========================================
+OVERLAY
+========================================= */
+
+.model-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.08));
+  z-index: 2;
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================
+LIGHT EFFECT
+========================================= */
+
+.model-card::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: 3;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transform: scale(0.8) rotate(0deg);
+  transition:
+    opacity 1.6s ease,
+    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* =========================================
+GLOW BORDER
+========================================= */
+
+.model-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 5;
+  opacity: 0;
+  transition:
+    opacity 1.2s ease,
+    border-color 1.2s ease;
+  pointer-events: none;
+}
+
+/* =========================================
+HOVER
+========================================= */
+
+.model-card:hover {
+  transform: translateY(-18px) scale(1.045) rotateX(2deg) rotateY(-2deg);
+  z-index: 999;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    0 40px 100px rgba(0, 0, 0, 0.55);
+}
+
+/* =========================================
+IMAGE
+========================================= */
+
+.model-card img {
+  position: absolute;
+  top: -8%;
+  left: 0;
+  width: 100%;
+  height: 115%;
+  object-fit: cover;
+  object-position: center center;
+  will-change: transform;
+
+  transition:
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.6s ease;
+}
+.model-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.04) contrast(1.08) saturate(1.02);
+}
+/* overlay */
+.model-card:hover .model-overlay {
+  opacity: 0.78;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.02));
+}
+
+/* light */
+.model-card:hover::before {
+  opacity: 1;
+  transform: scale(1.2) rotate(8deg);
+}
+
+/* border */
+.model-card:hover::after {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* name */
+.model-card:hover .model-name {
+  transform: translateY(-8px);
+  letter-spacing: 14px;
+}
+
+/* =========================================
+NAME
+========================================= */
+
+.model-name {
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.2rem;
+  letter-spacing: 10px;
+  font-weight: 200;
+  transition:
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease,
+    letter-spacing 1.2s ease;
+}
+
+@media only screen and (max-width: 768px) {
+  .viewport {
+    overflow: hidden;
+  }
+
+  .models-gallery {
+    padding: 250px 0px 0px;
+  }
+
+  .model-card {
+    width: 100%;
+    aspect-ratio: 320 / 440;
+    height: auto;
+  }
+
+  .model-card img {
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .model-name {
+    /* background-color: red; */
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0%;
+    bottom: 5px;
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    letter-spacing: 5px;
+  }
+}
+
+/* =========================================
+TITLE
+========================================= */
+/* --white------------------ */
+.agency-sub0 {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+
+  font-size: 28px;
+  letter-spacing: 12px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 100;
+}
+
+@media only screen and (max-width: 768px) {
+  .agency-sub0 {
+    top: 60px;
+    font-size: 20px;
+    letter-spacing: 10px;
+  }
+}
+
+/* =========================================
+SP
+========================================= */
+@media (max-width: 768px) {
+  /* =====================================
+     ZOOM IN
+  ===================================== */
+  #models-container.zoom-in-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    gap: 0;
+  }
+
+  #models-container.zoom-in-mobile .model-card {
+    width: 100vw;
+    height: auto;
+    aspect-ratio: 320 / 440;
+  }
+
+  #models-container.zoom-in-mobile .model-card img {
+    height: 100%;
+    top: 0;
+  }
+
+  /* =====================================
+     ZOOM OUT
+  ===================================== */
+
+  #models-container.zoom-out-mobile {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+
+  #models-container.zoom-out-mobile .model-card {
+    width: 100%;
+  }
+
+  #models-container.zoom-out-mobile .model-card img {
+    width: 100%;
+    height: 108%;
+    object-fit: cover;
+  }
+
+  #models-container.zoom-out-mobile .model-name {
+    font-size: 0.38rem;
+    letter-spacing: 1px;
+    left: 4px;
+    bottom: 4px;
+  }
+}

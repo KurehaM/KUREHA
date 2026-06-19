@@ -1,59 +1,252 @@
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>VALÉNOΛ Model Agency | International Fashion Models in Tokyo & Paris</title>
+    <title>
+      VALÉNOΛ Model Agency | Tokyo & Paris International Fashion Models
+    </title>
+    <link
+      rel="canonical"
+      href="https://valenoa-model-agency.com/en/agency.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="ja"
+      href="https://valenoa-model-agency.com/ja/agency.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://valenoa-model-agency.com/en/agency.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://valenoa-model-agency.com/fr/agency.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://valenoa-model-agency.com/"
+    />
 
-<link rel="alternate" hreflang="ja" href="https://valenoa-model-agency.com/ja/" />
-<link rel="alternate" hreflang="en" href="https://valenoa-model-agency.com/en/" />
-<link rel="alternate" hreflang="fr" href="https://valenoa-model-agency.com/fr/" />
-<link rel="alternate" hreflang="x-default" href="https://valenoa-model-agency.com/" />
+    <meta
+      name="description"
+      content="VALÉNOΛ is a luxury international model agency based in Tokyo and Paris, representing artistic fashion models for global brands, editorials, campaigns, and visual direction."
+    />
+    <meta name="robots" content="index,follow" />
 
-<meta name="description" content="VALÉNOΛ Model Agency is an international fashion model agency based in Tokyo and Paris, specializing in luxury visual identity, editorial, and artistic fashion representation.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<link rel="canonical" href="https://valenoa-model-agency.com/">
+    <!-- OGP -->
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="VALÉNOΛ Model Agency | Global Fashion Model Agency"
+    />
+    <meta
+      property="og:description"
+      content="Luxury international model agency based in Tokyo & Paris, representing artistic fashion models for editorials, campaigns, runway, and visual direction."
+    />
+    <meta property="og:site_name" content="VALÉNOΛ Model Agency" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://valenoa-model-agency.com/en/agency.html"
+    />
+    <meta
+      property="og:image"
+      content="https://valenoa-model-agency.com/images/ogp.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-<!-- OGP -->
-<meta property="og:title" content="VALÉNOΛ Model Agency">
-<meta property="og:description" content="International luxury fashion model agency connecting Tokyo and Paris through artistic visual identity.">
-<meta property="og:image" content="https://valenoa-model-agency.com/images/ogp.jpg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://valenoa-model-agency.com/">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VALÉNOΛ Model Agency" />
+    <meta
+      name="twitter:description"
+      content="Luxury international model agency based in Tokyo & Paris."
+    />
+    <meta
+      name="twitter:image"
+      content="https://valenoa-model-agency.com/images/ogp.jpg"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="author" content="VALÉNOΛ Model Agency" />
 
-<!-- favicon -->
-<link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png">
+    <!-- favicon -->
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" />
 
-<!-- =========================
-セキュリティヘッダー
-========================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<meta http-equiv="Content-Security-Policy"
-content="
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&display=swap"
+    />
+
+    <link rel="preload" href="/css/style_index.css" as="style" />
+    <link rel="stylesheet" href="/css/style_index.css" />
+
+    <!-- ーーーーーーーーVALÉNOΛ 専用ローディング用スクリプト ーーーーーーーー -->
+    <style>
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #030508;
+        z-index: 99999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+          opacity 1.6s cubic-bezier(0.25, 1, 0.5, 1),
+          visibility 1.6s; /* 消えるときの余韻も少し長く調整 */
+        opacity: 1;
+        visibility: visible;
+      }
+      #loading-screen.loaded {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 75px;
+        width: 100%;
+      }
+
+      /* タイポグラフィ：ラグジュアリーな静寂 */
+      .catchphrase-group {
+        text-align: center;
+        font-family: "Shippori Mincho B1", "YuMincho", "游明朝", serif;
+        opacity: 0;
+        animation: textReveal 2.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+      }
+      .catchphrase-en {
+        color: #ffffffb0;
+        font-size: 0.8rem;
+        font-weight: 300;
+        letter-spacing: 0.45em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .catchphrase-ja {
+        color: #ffffffe0;
+        font-size: 1.3rem;
+        font-weight: 400;
+        letter-spacing: 0.5em;
+        text-indent: 0.5em;
+        display: block;
+      }
+
+      /* カクつきゼロの優雅な低重心3D空間 */
+      .canvas-container {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        overflow: hidden;
+      }
+
+      .helix-pure-css {
+        position: absolute;
+        width: 200%;
+        height: 100%;
+        display: flex;
+        animation: vHelixScroll 16s linear infinite; /* 8sから16sへ変更：静寂と品格を極めた超スローモーション */
+      }
+
+      .helix-svg-pure {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      /* 絹糸のような超極細ライン */
+      .pure-line {
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      /* 手前：シャンパンゴールドとプラチナシルバー */
+      .p-gold-front {
+        stroke: url(#v-gold-gradient);
+        stroke-width: 1.1;
+        opacity: 0.95;
+      }
+      .p-silver-front {
+        stroke: url(#v-silver-gradient);
+        stroke-width: 1.1;
+        opacity: 0.9;
+      }
+
+      /* 奥：半透明に落とし込んだ深い陰影 */
+      .p-gold-back {
+        stroke: url(#v-gold-gradient);
+        stroke-width: 0.5;
+        opacity: 0.18;
+      }
+      .p-silver-back {
+        stroke: url(#v-silver-gradient);
+        stroke-width: 0.5;
+        opacity: 0.18;
+      }
+
+      /* 立体交差のためのマスク処理 */
+      .mask-layer-front {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      }
+
+      @keyframes textReveal {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+          filter: blur(4px);
+        }
+        100% {
+          opacity: 0.85;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      @keyframes vHelixScroll {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+    </style>
+    <!-- ーーーーーーーーCSP-ーーーーー------ -->
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
 default-src 'self';
-img-src 'self' data: blob:;
+img-src 'self' data: blob: https:;
 media-src 'self' blob:;
-script-src 'self' 'unsafe-inline';
+script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
 font-src 'self' https://fonts.gstatic.com;
-connect-src 'self';
-frame-ancestors 'none';
+connect-src 'self' https://www.google-analytics.com;
 base-uri 'self';
 form-action 'self';
 upgrade-insecure-requests;
-">
+"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-<meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
-<meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
-
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-XSS-Protection" content="1; mode=block">
-
-<meta name="referrer" content="strict-origin-when-cross-origin">
-
-<meta http-equiv="Permissions-Policy"
-content="
+    <meta
+      http-equiv="Permissions-Policy"
+      content="
 camera=(),
 microphone=(),
 geolocation=(),
@@ -63,418 +256,655 @@ accelerometer=(),
 gyroscope=(),
 magnetometer=(),
 fullscreen=(self)
-">
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"Organization",
-"name":"VALÉNOΛ",
-"alternateName":"VALENOA Model Agency",
-"url":"https://valenoa-model-agency.com/",
-"logo":"https://valenoa-model-agency.com/images/logo.png",
-"description":"International luxury fashion model agency based in Tokyo and Paris.",
-"foundingLocation":"Tokyo, Japan",
-"areaServed":[
-"Japan",
-  "France",
-  "Europe"
-],
-"sameAs":[
-  "https://www.instagram.com/valenoa"
-]
-}
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9RQYG0QC7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+"
+    />
 
-  gtag('config', 'G-Z9RQYG0QC7');
-</script>
-<style>
-.mask-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.504); /* 赤50% */
-  z-index: -1; /* 背景動画より上、文字より下 */
-}
-.background-index{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;      /* ← 高さも画面いっぱい */
-  object-fit: cover;  /* ← 画面いっぱいに最適化 */
-  z-index: -3;
-}
+    <!-- -------------------------------- -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "VALÉNOΛ Model Agency",
+        "url": "https://valenoa-model-agency.com/",
+        "logo": "https://valenoa-model-agency.com/images/logo.png",
 
+        "description": "Global fashion model agency based in Tokyo and Paris.",
 
-  :root{
-    --bg:#08070a;
-    --gold1:#f7e7c6;
-    --gold2:#d4b56a;
-    --gold3:#fbe8b8;
-  }
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Tokyo",
+            "addressCountry": "JP"
+          },
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Paris",
+            "addressCountry": "FR"
+          }
+        ],
 
-  html,body{
-    height:100%; margin:0;
-    font-family: "Didot", "Baskerville", "Times New Roman", serif;
-    overflow: hidden; /* ← 縦スクロールしない */
-  }
-  body.fade-out {
-  opacity: 0;
-  background: #000 !important; /* ← フェードアウト中だけ黒 */
-}
+        "areaServed": "Worldwide",
 
-  .stage{
-    min-height:100vh;
-    display:flex; align-items:center; justify-content:center;
-    padding:4vh 4vw;
-    
-  }
+        "founder": {
+          "@type": "Organization",
+          "name": "VALÉNOΛ"
+        },
+        "sameAs": ["https://www.instagram.com/valenoa_presence/"]
+      }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z9RQYG0QC7"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  .card{
-    width:min(880px, 92vw);
-    padding: clamp(26px, 3.5vh, 38px);
-    /* border-radius:18px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.006)); */
-    /* box-shadow: 0 8px 32px rgba(0,0,0,0.65); */
-    position:relative;
-  }
+      gtag("config", "G-Z9RQYG0QC7");
+    </script>
+  </head>
 
-  .logo-wrap{
-    display:flex; align-items:center; justify-content:center;
-    padding: clamp(18px, 3vh, 36px) 0;
-    position:relative;
-  }
+  <body>
+    <!-- =========================================================
+     VALÉNOΛ PRESTIGE LOADING SCREEN (タイポ修正・100%表示版)
+========================================================= -->
+    <div id="loading-screen">
+      <div class="loader-wrapper">
+        <div class="catchphrase-group">
+          <span class="catchphrase-ja">流行よりも残る美しさを</span>
+          <br />
+          <span class="catchphrase-en"
+            >Presence Beyond Trends.Beauty That Remains.</span
+          >
+        </div>
 
-  svg{ width:100%; height:auto; display:block; }
+        <div class="canvas-container">
+          <div class="helix-pure-css">
+            <!-- エラー原因だった属性名を preserveAspectRatio="none" に完璧に修正 -->
+            <svg
+              class="helix-svg-pure"
+              viewBox="0 0 3840 40"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient
+                  id="v-gold-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#d4b56a" stop-opacity="0" />
+                  <stop offset="15%" stop-color="#d4b56a" stop-opacity="0.3" />
+                  <stop offset="50%" stop-color="#fdf7ed" stop-opacity="0.95" />
+                  <stop offset="85%" stop-color="#e8d9b2" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#e8d9b2" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="v-silver-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#8a95a5" stop-opacity="0" />
+                  <stop offset="15%" stop-color="#8a95a5" stop-opacity="0.3" />
+                  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.9" />
+                  <stop offset="85%" stop-color="#606975" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#606975" stop-opacity="0" />
+                </linearGradient>
+              </defs>
 
-  /* 細くクラシックな描線 */
-  .stroke-layer{
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-  }
+              <!-- LAYER 1 : 奥側（緩やかな影線） -->
+              <path
+                class="pure-line p-gold-back"
+                d="M 0 20 Q 80 2, 160 20 T 320 20 T 480 20 T 640 20 T 800 20 T 960 20 T 1120 20 T 1280 20 T 1440 20 T 1600 20 T 1760 20 T 1920 20 T 2080 20 T 2240 20 T 2400 20 T 2560 20 T 2720 20 T 2880 20 T 3040 20 T 3200 20 T 3360 20 T 3520 20 T 3680 20 T 3840 20"
+              />
+              <path
+                class="pure-line p-silver-back"
+                d="M 0 20 Q 80 38, 160 20 T 320 20 T 480 20 T 640 20 T 800 20 T 960 20 T 1120 20 T 1280 20 T 1440 20 T 1600 20 T 1760 20 T 1920 20 T 2080 20 T 2240 20 T 2400 20 T 2560 20 T 2720 20 T 2880 20 T 3040 20 T 3200 20 T 3360 20 T 3520 20 T 3680 20 T 3840 20"
+              />
 
-  .engrave{
-    fill: rgba(0,0,0,0.14);
-    transform: translateY(4%);
-    filter: blur(4px);
-  }
-
-  .fill-layer{
-    fill-opacity: 0; /* ← stroke 完了まで完全に透明 */
-    transform-origin: center;
-  }
-
-  @keyframes strokeReveal {
-    from { stroke-dashoffset: var(--len); }
-    to   { stroke-dashoffset: 0; }
-  }
-
-  @keyframes fillFade {
-    from { fill-opacity:0; transform:translateY(6px) scale(1.02); }
-    to   { fill-opacity:1; transform:translateY(0) scale(1); }
-  }
-
-  .anim-draw{ animation: strokeReveal var(--draw-time) cubic-bezier(.22,.9,.3,1) forwards; }
-  .anim-fill{ animation: fillFade 420ms ease-out forwards; }
-
-  .tag{
-    text-align:center;
-    font-family: "Helvetica Neue", "Yu Gothic UI", sans-serif;
-    /* background-color: red; */
-    font-weight: 300;
-    letter-spacing: 15px;
-    margin-top:-80px;
-    color:rgba(255,255,255,0.58);
-    font-size:16px;
-  }
-  .seo-h1{
-position:absolute;
-left:-9999px;
-top:auto;
-width:1px;
-height:1px;
-overflow:hidden;
-}
-
-  .seo-h2{
-position:absolute;
-left:-9999px;
-top:auto;
-width:1px;
-height:1px;
-overflow:hidden;
-}
-
- @media (max-width: 768px) {
-
-  #strokeText,
-  #fillText,
-  .engrave{
-    font-size: 182px;
-  }
-.tag{
-   text-align:center;
-  width: max-content;
-margin-top:-30px;
-font-size:13px;
-letter-spacing: 10px;
-/* background-color: red; */
-}
-
-
-
-} 
-</style>
-
-</head>
-
-<body>
-<h1 class="seo-h1">
-VALÉNOΛ Model Agency – Luxury International Fashion Models in Tokyo & Paris</h1>
-<h2 class="seo-h2">
-Luxury fashion model agency representing international models
-</h2>
-<div style="position:absolute;left:-9999px">
-
-<a href="https://valenoa-model-agency.com/ja/">日本語</a>
-<a href="https://valenoa-model-agency.com/en/">English</a>
-<a href="https://valenoa-model-agency.com/fr/">Français</a>
-
-</div>
-  <div class="mask-overlay"></div>
-  <div class="video-background-index">
-      <video class="background-index" src="/movie/backgraund-index.mov" autoplay loop muted playsinline></video>
-      <!-- <video class="background-top-mobile" src="/movie/background-mobile.mov" autoplay loop muted playsinline></video> -->
-    </div>
-<div class="stage">
-  <div class="card">
-
-    <div class="logo-wrap">
-      <svg id="logoSVG" viewBox="0 0 1200 240">
-
-        <defs>
-          <linearGradient id="goldStroke" x1="0" x2="1">
-            <stop offset="0%" stop-color="#fff9e6"/>
-            <stop offset="35%" stop-color="#f7e7c6"/>
-            <stop offset="65%" stop-color="#d4b56a"/>
-            <stop offset="100%" stop-color="#fce9c0"/>
-          </linearGradient>
-
-          <linearGradient id="champagne" x1="0" x2="1">
-            <stop offset="0%" stop-color="#fdf7ed"/>
-            <stop offset="48%" stop-color="#f3e4c8"/>
-            <stop offset="100%" stop-color="#e8d9b2"/>
-          </linearGradient>
-        </defs>
-
-   <text class="engrave"
-          x="50%" y="60%" text-anchor="middle"
-          font-size="112" font-weight="500"
-          font-family='"Didot","Baskerville","Times New Roman",serif'>
-          VALÉNOΛ
-        </text>
-
-        <!-- 文字ごとに tspan に分けた stroke -->
-        <text id="strokeText" class="stroke-layer"
-          x="50%" y="56%" text-anchor="middle"
-          font-size="112" font-weight="500"
-          stroke="url(#goldStroke)" fill="none">
-          <tspan>V</tspan><tspan>A</tspan><tspan>L</tspan><tspan>É</tspan><tspan>N</tspan><tspan>O</tspan><tspan>Λ</tspan>
-        </text>
-
-        <!-- 同じく文字ごとに tspan -->
-        <text id="fillText" class="fill-layer"
-          x="50%" y="56%" text-anchor="middle"
-          font-size="112" font-weight="500"
-          fill="url(#champagne)">
-          <tspan>V</tspan><tspan>A</tspan><tspan>L</tspan><tspan>É</tspan><tspan>N</tspan><tspan>O</tspan><tspan>Λ</tspan>
-        </text>
-
-      </svg>
+              <!-- LAYER 2 : 手前側（美しくまたぎ合う立体実線群） -->
+              <g class="mask-layer-front">
+                <path
+                  class="pure-line p-gold-front"
+                  d="M 0 20 Q 80 38, 160 20 T 320 20 T 480 20 T 640 20 T 800 20 T 960 20 T 1120 20 T 1280 20 T 1440 20 T 1600 20 T 1760 20 T 1920 20 T 2080 20 T 2240 20 T 2400 20 T 2560 20 T 2720 20 T 2880 20 T 3040 20 T 3200 20 T 3360 20 T 3520 20 T 3680 20 T 3840 20"
+                />
+                <path
+                  class="pure-line p-silver-front"
+                  d="M 0 20 Q 80 2, 160 20 T 320 20 T 480 20 T 640 20 T 800 20 T 960 20 T 1120 20 T 1280 20 T 1440 20 T 1600 20 T 1760 20 T 1920 20 T 2080 20 T 2240 20 T 2400 20 T 2560 20 T 2720 20 T 2880 20 T 3040 20 T 3200 20 T 3360 20 T 3520 20 T 3680 20 T 3840 20"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="tag">VALÉNOΛ MODEL AGENCY</div>
-  </div>
-</div>
+    <header>
+      <!-- LANGUAGES -->
+      <nav
+        id="langSelector"
+        class="lang-selector"
+        aria-label="Language selector"
+      >
+        <button data-lang="ja" aria-label="Switch language to Japanese">
+          ja
+        </button>
+        <button data-lang="en" aria-label="Switch language to English">
+          en
+        </button>
 
-<style>
-  /* 既存スタイルに追加 */
-  body {
-    opacity: 1;
-    transition: opacity 1s ease; /* フェードアウト用 */
-  }
-  body.fade-out {
-    opacity: 0;
-  }
-</style>
+        <button data-lang="fr" aria-label="Switch language to French">
+          fr
+        </button>
+      </nav>
 
-<script>
-  // Topリンククリック用（既存）
-  const fillText = document.getElementById("fillText");
-  fillText.style.cursor = "pointer";
-  fillText.addEventListener("click", () => {
-    fadeToTop();
-  });
+      <!-- MENU -->
+      <nav id="menuSelector" class="global-menu" aria-label="Global menu">
+        <button data-page="concept">CONCEPT</button>
+        <button data-page="model">MODEL</button>
+        <button data-page="contact">CONTACT</button>
+      </nav>
+    </header>
 
-  (function(){
-    const s = document.getElementById("strokeText");
-    const f = document.getElementById("fillText");
+    <main>
+      <!-- SEO ONLY -->
+      <section class="seo-layer">
+        <h1>VALÉNOΛ Model Agency | Global Fashion Model Agency</h1>
 
-    const drawTime = 4500;  // stroke 描画時間
-    document.documentElement.style.setProperty("--draw-time", drawTime+"ms");
+        <p>
+          VALÉNOΛ is a global fashion model agency based in Tokyo and Paris,
+          representing international talent worldwide.
+        </p>
+      </section>
 
-    function start(){
-      let len = 2400;
-      try{ len = s.getComputedTextLength(); }catch(e){}
-      document.documentElement.style.setProperty("--len", len);
-      s.style.strokeDasharray = len;
-      s.style.strokeDashoffset = len;
+      <!-- VISUAL EXPERIENCE -->
+      <section class="gateway">
+        <div class="brand">VALÉNOΛ</div>
 
-      void s.offsetWidth;
-      s.classList.add("anim-draw");
+        <div class="tagline">GLOBAL MODEL AGENCY</div>
 
-      // stroke 完全描画後に fill アニメーション
-      setTimeout(()=> f.classList.add("anim-fill"), drawTime * 0.6);
-    }
+        <div class="select">ENTER GLOBAL EXPERIENCE</div>
 
-    if(document.fonts) document.fonts.ready.then(start);
-    else setTimeout(start, 200);
-  })();
- 
-  // -------------------------------
-  // フェードアウトしてTop.htmlに遷移する関数
-  function fadeToTop() {
-    document.body.classList.add("fade-out");
-    setTimeout(() => {
-      window.location.href = "Top.html";
-    }, 1000); 
-  }
+        <nav class="languages" aria-label="Language selector">
+          <a href="/ja/agency.html">JA</a>
+          <a href="/en/agency.html">EN</a>
+          <a href="/fr/agency.html">FR</a>
+        </nav>
+      </section>
 
-  // ページ読み込みから5秒後に自動遷移
-  setTimeout(fadeToTop, 5000);
-  
-  // ーーーーークリック防止ーーーーーーーーーーーーーーーーーーーーー
+      <!-- VISUAL SYSTEM -->
+      <div class="fixed-ui">
+        <!-- ---------FIX------------------------------------------ -->
+        <!-- =========================================================
 
-// document.addEventListener("DOMContentLoaded", function(){
+FIXED BACKGROUND UI
 
-/* ===============================
-右クリック禁止
-=============================== */
-// document.addEventListener("contextmenu", function(e){
-//   if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
-//     e.preventDefault();
-//   }
-// });
+========================================================= -->
 
-/* ===============================
-ドラッグ保存禁止
-=============================== */
-// document.addEventListener("dragstart", function(e){
-//   if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
-//     e.preventDefault();
-//   }
-// });
+        <!-- dark overlay -->
+        <div class="mask-overlay"></div>
 
-/* ===============================
-コピー禁止
-=============================== */
-// document.addEventListener("copy", function(e){
+        <!-- background movie -->
+        <video
+          class="background-index"
+          src="/movie/background-index.mp4"
+          preload="metadata"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
 
-//   if(
-//     e.target.tagName==="IMG" ||
-//     e.target.tagName==="VIDEO"
-//   ){
-//     e.preventDefault();
-//   }
+        <!-- CENTER LOGO -->
+        <div class="stage">
+          <div class="card">
+            <div class="logo-wrap">
+              <svg id="logoSVG" viewBox="0 0 1200 240">
+                <defs>
+                  <linearGradient id="goldStroke" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#fff9e6" />
+                    <stop offset="35%" stop-color="#f7e7c6" />
+                    <stop offset="65%" stop-color="#d4b56a" />
+                    <stop offset="100%" stop-color="#fce9c0" />
+                  </linearGradient>
+                  <linearGradient id="champagne" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#fdf7ed" />
+                    <stop offset="48%" stop-color="#f3e4c8" />
+                    <stop offset="100%" stop-color="#e8d9b2" />
+                  </linearGradient>
+                </defs>
 
-// });
-/* ===============================
-キーボードショートカット禁止
-=============================== */
-// document.addEventListener("keydown", function(e){
+                <!-- shadow -->
+                <text
+                  class="engrave"
+                  x="50%"
+                  y="60%"
+                  text-anchor="middle"
+                  font-size="112"
+                  font-weight="500"
+                  font-family='"Didot","Baskerville","Times New Roman",serif'
+                >
+                  VALÉNOΛ
+                </text>
 
-//   if(
-//     e.key==="F12" ||
-//     e.key==="PrintScreen" ||
+                <!-- stroke -->
+                <text
+                  id="strokeText"
+                  class="stroke-layer"
+                  x="50%"
+                  y="56%"
+                  text-anchor="middle"
+                  font-size="112"
+                  font-weight="500"
+                  stroke="url(#goldStroke)"
+                  fill="none"
+                >
+                  <tspan>V</tspan>
+                  <tspan>A</tspan>
+                  <tspan>L</tspan>
+                  <tspan>É</tspan>
+                  <tspan>N</tspan>
+                  <tspan>O</tspan>
+                  <tspan>Λ</tspan>
+                </text>
 
-//     (e.ctrlKey && e.key==="s") ||
-//     (e.ctrlKey && e.key==="u") ||
-//     (e.ctrlKey && e.key==="c") ||
-//     (e.ctrlKey && e.key==="a") ||
-//     (e.ctrlKey && e.key==="p") ||
+                <!-- fill -->
+                <text
+                  id="fillText"
+                  class="fill-layer"
+                  x="50%"
+                  y="56%"
+                  text-anchor="middle"
+                  font-size="112"
+                  font-weight="500"
+                  fill="url(#champagne)"
+                >
+                  <tspan>V</tspan>
+                  <tspan>A</tspan>
+                  <tspan>L</tspan>
+                  <tspan>É</tspan>
+                  <tspan>N</tspan>
+                  <tspan>O</tspan>
+                  <tspan>Λ</tspan>
+                </text>
+              </svg>
+            </div>
+            <div class="tag">VALÉNOΛ MODEL AGENCY</div>
+          </div>
+        </div>
+      </div>
+      <!-- 言語選択を card 内へ -->
+      <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+    </main>
 
-//     (e.ctrlKey && e.shiftKey && e.key==="I") ||
-//     (e.ctrlKey && e.shiftKey && e.key==="J") ||
-//     (e.ctrlKey && e.shiftKey && e.key==="C")
-//   ){
-//     e.preventDefault();
-//     return false;
-//   }
+    <!-- FIXED FOOTER -->
+    <footer class="index-copyright">
+      © VALÉNOΛ MODEL AGENCY All Rights Reserved.
+    </footer>
 
-// });
+    <script>
+      (function () {
+        const s = document.getElementById("strokeText");
+        const f = document.getElementById("fillText");
 
-/* ===============================
-PrintScreen対策
-=============================== */
+        const drawTime = 4500; // stroke 描画時間
+        document.documentElement.style.setProperty(
+          "--draw-time",
+          drawTime + "ms",
+        );
 
-// document.addEventListener("keyup", function(e){
+        function start() {
+          let len = 2400;
+          try {
+            len = s.getComputedTextLength();
+          } catch (e) {}
+          document.documentElement.style.setProperty("--len", len);
+          s.style.strokeDasharray = len;
+          s.style.strokeDashoffset = len;
 
-//   if(e.key === "PrintScreen"){
+          void s.offsetWidth;
+          s.classList.add("anim-draw");
 
-//     navigator.clipboard.writeText("");
+          // stroke 完全描画後に fill アニメーション
+          setTimeout(() => f.classList.add("anim-fill"), drawTime * 0.6);
+        }
 
-//     alert("Screenshots are not permitted on this portfolio.");
+        if (document.fonts) {
+          document.fonts.ready.then(() => {
+            setTimeout(start, 3000);
+          });
+        } else {
+          setTimeout(start, 3200);
+        }
+      })();
 
-//   }
+      // // ===============================
+      // // 言語ボタン フェードイン
+      // // ===============================
 
-// });
+      window.addEventListener("load", () => {
+        const langSelector = document.querySelector(".lang-selector");
 
-/* ===============================
-DevTools検知
-=============================== */
+        // VALÉNOΛロゴ描画完了後に表示
+        setTimeout(() => {
+          const langSelector = document.querySelector(".lang-selector");
+          if (langSelector) {
+            langSelector.classList.add("show");
+          }
+        }, 6500);
+      });
+      // ===============================
+      // 言語切替アニメーション
+      // ===============================
 
-// setInterval(function(){
+      const langButtons = document.querySelectorAll(".lang-selector button");
 
-//   const widthThreshold = window.outerWidth - window.innerWidth > 160;
-//   const heightThreshold = window.outerHeight - window.innerHeight > 160;
+      const menuSelector = document.getElementById("menuSelector");
 
-//   if(widthThreshold || heightThreshold){
+      const menuButtons = document.querySelectorAll(".global-menu button");
 
-//     document.body.innerHTML="";
+      let selectedLang = "";
 
-//     alert("Developer tools are not allowed.");
+      // ===============================
+      // 言語選択
+      // ===============================
 
-//   }
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedLang = button.dataset.lang;
 
-// },2000);
+          // active化
+          langButtons.forEach((btn) => {
+            btn.classList.remove("active");
+          });
 
-/* ===============================
-動画ダウンロード防止
-=============================== */
+          button.classList.add("active");
 
-// document.querySelectorAll("video").forEach(video=>{
-//   video.controlsList="nodownload";
-//   video.disablePictureInPicture=true;
-// });
+          // メニュー表示
+          setTimeout(() => {
+            menuSelector.classList.add("show");
+          }, 400);
+        });
+      });
 
-/* ===============================
-テキスト選択禁止
-=============================== */
+      // ===============================
+      // メニュークリック
+      // ===============================
 
-// document.body.style.userSelect="none";
+      menuButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const page = button.dataset.page;
 
-// });
+          let targetUrl = "";
 
-</script>
-</body>
+          // -----------------
+          // 日本語
+          // -----------------
+
+          if (selectedLang === "ja") {
+            if (page === "model") {
+              targetUrl = "/ja/model.html";
+            }
+
+            if (page === "concept") {
+              targetUrl = "/ja/agency.html#concept";
+            }
+
+            if (page === "contact") {
+              targetUrl = "/ja/agency.html#contact";
+            }
+          }
+
+          // -----------------
+          // 英語
+          // -----------------
+
+          if (selectedLang === "en") {
+            if (page === "model") {
+              targetUrl = "/en/model.html";
+            }
+
+            if (page === "concept") {
+              targetUrl = "/en/agency.html#concept";
+            }
+
+            if (page === "contact") {
+              targetUrl = "/en/agency.html#contact";
+            }
+          }
+
+          // -----------------
+          // フランス語
+          // -----------------
+
+          if (selectedLang === "fr") {
+            if (page === "model") {
+              targetUrl = "/fr/model.html";
+            }
+
+            if (page === "concept") {
+              targetUrl = "/fr/agency.html#concept";
+            }
+
+            if (page === "contact") {
+              targetUrl = "/fr/agency.html#contact";
+            }
+          }
+
+          // 遷移
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 600);
+        });
+      });
+
+      // ーーーーークリック防止ーーーーーーーーーーーーーーーーーーーーー
+
+      // document.addEventListener("DOMContentLoaded", function(){
+
+      /* ===============================
+          右クリック禁止
+          =============================== */
+      // document.addEventListener("contextmenu", function(e){
+      // if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+      // e.preventDefault();
+      // }
+      // });
+
+      /* ===============================
+          ドラッグ保存禁止
+          =============================== */
+      // document.addEventListener("dragstart", function(e){
+      // if(e.target.tagName==="IMG" || e.target.tagName==="VIDEO"){
+      // e.preventDefault();
+      // }
+      // });
+
+      /* ===============================
+          コピー禁止
+          =============================== */
+      // document.addEventListener("copy", function(e){
+
+      // if(
+      // e.target.tagName==="IMG" ||
+      // e.target.tagName==="VIDEO"
+      // ){
+      // e.preventDefault();
+      // }
+
+      // });
+      /* ===============================
+          キーボードショートカット禁止
+          =============================== */
+      // document.addEventListener("keydown", function(e){
+
+      // if(
+      // e.key==="F12" ||
+      // e.key==="PrintScreen" ||
+
+      // (e.ctrlKey && e.key==="s") ||
+      // (e.ctrlKey && e.key==="u") ||
+      // (e.ctrlKey && e.key==="c") ||
+      // (e.ctrlKey && e.key==="a") ||
+      // (e.ctrlKey && e.key==="p") ||
+
+      // (e.ctrlKey && e.shiftKey && e.key==="I") ||
+      // (e.ctrlKey && e.shiftKey && e.key==="J") ||
+      // (e.ctrlKey && e.shiftKey && e.key==="C")
+      // ){
+      // e.preventDefault();
+      // return false;
+      // }
+
+      // });
+
+      /* ===============================
+          PrintScreen対策
+          =============================== */
+
+      // document.addEventListener("keyup", function(e){
+
+      // if(e.key === "PrintScreen"){
+
+      // navigator.clipboard.writeText("");
+
+      // alert("Screenshots are not permitted on this portfolio.");
+
+      // }
+
+      // });
+
+      /* ===============================
+          DevTools検知
+          =============================== */
+
+      // setInterval(function(){
+
+      // const widthThreshold = window.outerWidth - window.innerWidth > 160;
+      // const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+      // if(widthThreshold || heightThreshold){
+
+      // document.body.innerHTML="";
+
+      // alert("Developer tools are not allowed.");
+
+      // }
+
+      // },2000);
+
+      /* ===============================
+          動画ダウンロード防止
+          =============================== */
+
+      // document.querySelectorAll("video").forEach(video=>{
+      // video.controlsList="nodownload";
+      // video.disablePictureInPicture=true;
+      // });
+
+      /* ===============================
+          テキスト選択禁止
+          =============================== */
+
+      // document.body.style.userSelect="none";
+
+      // });
+      //
+      //
+    </script>
+
+    <!-- ーーーーーーーーVALÉNOΛ 専用ローディング用スクリプト（真の3D二重螺旋） ーーーーーーーー -->
+    <script>
+      (function () {
+        const gFront = document.getElementById("v-g-front");
+        const gBack = document.getElementById("v-g-back");
+        const sFront = document.getElementById("v-s-front");
+        const sBack = document.getElementById("v-s-back");
+        let alpha = 0;
+
+        function drawPerfect3DHelix() {
+          alpha += 0.022; // 息をのむほど優雅で滑らかな自転速度
+
+          let gf = "",
+            gb = "",
+            sf = "",
+            sb = "";
+
+          // 画面の左端から右端までを細かくサンプリングして滑らかな絹糸を描画
+          for (let x = 0; x <= 1920; x += 4) {
+            // 画面幅に対して美しく無限に続く波の細かさ
+            let angleG = x * 0.015 + alpha;
+            let angleS = angleG + Math.PI; // シルバーはゴールドの真逆（180度）から交差する運命の糸
+
+            // Z軸（奥行き）を計算。プラスなら手前、マイナスなら奥
+            let zG = Math.cos(angleG);
+            let zS = Math.cos(angleS);
+
+            // Y軸（上下の揺れ幅）。デカすぎず細すぎない上品な18pxの自転半径
+            let yG = 50 + Math.sin(angleG) * 18;
+            let yS = 50 + Math.sin(angleS) * 18;
+
+            // ーー ゴールド（DNAストランド1）の立体パス生成 ーー
+            if (zG >= 0) {
+              gf += gf === "" ? `M ${x} ${yG}` : ` L ${x} ${yG}`; // 手前の実線
+            } else {
+              gb += gb === "" ? `M ${x} ${yG}` : ` L ${x} ${yG}`; // 奥の影線
+            }
+
+            // ーー シルバー（DNAストランド2）の立体パス生成 ーー
+            if (zS >= 0) {
+              sf += sf === "" ? `M ${x} ${yS}` : ` L ${x} ${yS}`; // 手前の実線
+            } else {
+              sb += sb === "" ? `M ${x} ${yS}` : ` L ${x} ${yS}`; // 奥の影線
+            }
+          }
+
+          // 手前の線は太く（1.4px）して存在感を出し、奥の線は極細（0.6px）かつ半透明にして完璧な奥行きを表現
+          if (gFront && gBack && sFront && sBack) {
+            gFront.setAttribute("d", gf);
+            gFront.setAttribute("stroke-width", "1.4");
+            gFront.style.opacity = "0.95";
+            gBack.setAttribute("d", gb);
+            gBack.setAttribute("stroke-width", "0.6");
+            gBack.style.opacity = "0.25";
+            sFront.setAttribute("d", sf);
+            sFront.setAttribute("stroke-width", "1.4");
+            sFront.style.opacity = "0.9";
+            sBack.setAttribute("d", sb);
+            sBack.setAttribute("stroke-width", "0.6");
+            sBack.style.opacity = "0.25";
+          }
+
+          requestAnimationFrame(drawPerfect3DHelix);
+        }
+
+        drawPerfect3DHelix();
+
+        window.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            const loader = document.getElementById("loading-screen");
+
+            if (loader) {
+              loader.classList.add("loaded");
+
+              // ローダーのフェードアウト完了後
+              setTimeout(() => {
+                const langSelector = document.querySelector(".lang-selector");
+                if (langSelector) {
+                  langSelector.classList.add("show");
+                }
+              }, 1800);
+            }
+          }, 2500);
+        });
+      })();
+    </script>
+  </body>
 </html>

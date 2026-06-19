@@ -1,32 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <url>
+    <loc>https://valenoa-model-agency.com/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://valenoa-model-agency.com/ja/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://valenoa-model-agency.com/ja/portfolio.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://valenoa-model-agency.com/ja/agency.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://valenoa-model-agency.com/en/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://valenoa-model-agency.com/fr/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+
+  <url>
+    <loc>https://valenoa-model-agency.com/thx.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.3</priority>
+  </url>
+
 <url>
-<loc>https://valenoa-model-agency.com/</loc>
+  <loc>https://valenoa-model-agency.com/en/portfolio.html</loc>
+  <lastmod>2026-05-11</lastmod>
+  <priority>0.8</priority>
 </url>
 
 <url>
-<loc>https://valenoa-model-agency.com/index.html</loc>
-</url>
-
-<url>
-<loc>https://valenoa-model-agency.com/KUREHA.html</loc>
-</url>
-
-<url>
-<loc>https://valenoa-model-agency.com/Portfolio.html</loc>
-</url>
-
-<url>
-<loc>https://valenoa-model-agency.com/en/</loc>
-</url>
-
-<url>
-<loc>https://valenoa-model-agency.com/fr/</loc>
-</url>
-
-<url>
-<loc>https://valenoa-model-agency.com/thx.html</loc>
+  <loc>https://valenoa-model-agency.com/fr/portfolio.html</loc>
+  <lastmod>2026-05-11</lastmod>
+  <priority>0.8</priority>
 </url>
 
 </urlset>
+
+<url>
+  <loc>https://valenoa-model-agency.com/ja/KUREHA.html</loc>
+  <lastmod>2026-05-16</lastmod>
+  <priority>1.0</priority>
+</url>
+
+<url>
+  <loc>https://valenoa-model-agency.com/en/KUREHA.html</loc>
+  <lastmod>2026-05-16</lastmod>
+  <priority>1.0</priority>
+</url>
+
+<url>
+  <loc>https://valenoa-model-agency.com/fr/KUREHA.html</loc>
+  <lastmod>2026-05-16</lastmod>
+  <priority>1.0</priority>
+</url>
+
+<url>
+  <loc>https://valenoa-model-agency.com/ja/model.html</loc>
+  <lastmod>2026-05-11</lastmod>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://valenoa-model-agency.com/en/model.html</loc>
+  <lastmod>2026-05-11</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://valenoa-model-agency.com/fr/model.html</loc>
+  <lastmod>2026-05-11</lastmod>
+  <priority>0.8</priority>
+</url>

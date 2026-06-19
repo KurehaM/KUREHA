@@ -1,0 +1,137 @@
+/* contact-common.css */
+
+/* ------------------------
+ valenoa_logo  
+  ------------------------*/
+.valenoa_logo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+.valenoa_logo img {
+  width: clamp(120px, 10vw, 180px);
+  height: auto;
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 768px) {
+  .valenoa_logo {
+    top: 4vh;
+  }
+  .valenoa_logo img {
+    width: clamp(120px, 11vw, 180px);
+    height: auto;
+    opacity: 0.8;
+  }
+}
+/* --------------------------------------------------
+  THE MODE - CSSのみで完結する透過サークル（文字なし）
+-------------------------------------------------- */
+
+/* 右下の絶対座標に空間を固定（画像の美しい空気感へ） */
+.fixed-contact-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0px 70px 50px 40px; /* 画面端から計算されたモードな余白 */
+  /* background: transparent; */
+  /* background: red; */
+}
+
+/* 完璧な透過正円のコンパクトボタン（文字を消し、アイコンのみを真ん中に配置） */
+.fixed-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* アイコンをど真ん中に固定 */
+  width: 50px; /* 画像の美しいスケール感に合わせた正円 */
+  height: 50px;
+  border-radius: 50%; /* 完璧な丸型に強制 */
+
+  /* 元の背景色やノイズを完全にクリアし、背景動画を100%透過させる */
+  background: transparent !important;
+
+  /* 画像にあるような、髪の毛のように細く美しい1pxの極細線 */
+  border: 1px solid rgba(255, 255, 255, 0.689) !important;
+  outline: none !important; /* 不要な線を消去 */
+
+  /* 元コードの擬似要素（バーストエフェクトやノイズ）を完全に無効化 */
+  position: relative;
+  text-transform: uppercase;
+  font-size: 0px !important; /* 💡文字（CONTACT）だけを画面上から完全に消し去るマジック */
+  color: transparent !important; /* 文字の色も完全に透明化 */
+  letter-spacing: 0 !important;
+
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform: translateY(80%) !important;
+  cursor: pointer;
+}
+
+/* 既存のメールアイコンを極細・シャープにリデザイン */
+.fixed-contact-btn svg {
+  width: 25px !important; /* 円の中に美しく美しく収まるサイズ */
+  height: 25px !important;
+  stroke: rgba(255, 255, 255, 0.689);
+  stroke-width: 0.9 !important; /* 限界まで線を細くしてモードに */
+  stroke-linecap: square !important;
+  stroke-linejoin: miter !important; /* 角を丸めず、キリッと尖らせる */
+  fill: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 【ホバーインタラクション】 */
+
+.fixed-contact-btn:hover {
+  /* ほんの少しだけ空気感が変わる（動画のノイズを邪魔しない微細な変化） */
+  background: rgba(255, 255, 255, 0.03) !important;
+
+  /* 境界線がパキッと確固たる白へ浮かび上がる */
+  border-color: rgba(255, 255, 255, 0.95) !important;
+
+  /* 💡重要：ホバー前の「translateY(80%)」を維持したまま、美しく1.04倍に浮遊させます */
+  transform: translateY(80%) scale(1.04) !important;
+}
+
+/* ホバーした瞬間、中心のメールマークが吸い込まれるように美しく反応 */
+.fixed-contact-btn:hover svg {
+  /* アイコンの線もパキッとした美しい白へ */
+  stroke: rgba(255, 255, 255, 0.95) !important;
+
+  /* わずかにキュッと引き締まり、クリックしたくなる緊張感を演出 */
+  transform: scale(0.92) !important;
+}
+/* 画面全体を覆う黒い幕（レイヤー）を消していくアニメーション */
+@keyframes blackFadeOut {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden; /* アニメーション終了後にクリックを邪魔しないようにする */
+  }
+}
+
+body {
+  position: relative;
+}
+
+/* 黒い幕の初期設定（2.0秒かけてゆっくり透明にする） */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000; /* 完全な黒 */
+  z-index: 9999; /* すべての要素の一番上に配置 */
+  pointer-events: none; /* 下にあるボタンなどのクリックを妨げない */
+
+  /* アニメーションの指定：2.0秒 / 滑らかな緩急（ease-out） */
+  animation: blackFadeOut 2s ease-out 0.5s 1 normal both;
+}

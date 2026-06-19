@@ -2,3 +2,10 @@ User-agent: *
 Allow: /
 
 Sitemap: https://valenoa-model-agency.com/sitemap.xml
+User-agent: *
+Allow: /
+
+Disallow: /cdn-cgi/
+Disallow: /cgi-bin/
+
+Sitemap: https://valenoa-model-agency.com/sitemap.xml
