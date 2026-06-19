@@ -160,13 +160,15 @@ document.addEventListener("wheel",(e)=>{
   }
 }
 
-  function closeModal() {
+function closeModal() {
   modal.classList.remove("show");
   modalVideo.pause();
 
+  modalImage.removeAttribute("src");
+  modalVideo.removeAttribute("src");
+
   gtag('event', 'close_modal');
 }
-
   function changeModalImage(dir) {
     const max = itemsList.length;
     currentIndex = (currentIndex + dir + max) % max;
