@@ -225,29 +225,13 @@
         }
       }
     </style>
-    <!-- ーーーーーーーーCSP-ーーーーー------ -->
-
+<!-- CSP -->
 <meta
   http-equiv="Content-Security-Policy"
-  content="
-default-src 'self';
-img-src 'self' data: blob: https:;
-media-src 'self' blob:;
-script-src 'self' 'unsafe-inline'
-https://www.googletagmanager.com
-https://www.google-analytics.com
-https://static.cloudflareinsights.com;
-style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-font-src 'self' https://fonts.gstatic.com;
-connect-src 'self'
-https://www.google-analytics.com
-https://cloudflareinsights.com;
-base-uri 'self';
-form-action 'self';
-upgrade-insecure-requests;
-"
-/>
-    <!-- -------------------------------- -->
+  content="default-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://cloudflareinsights.com; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+/>  
+
+<!-- json -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -413,8 +397,11 @@ upgrade-insecure-requests;
       </section>
 
       <!-- VISUAL EXPERIENCE -->
-      <section class="gateway">
-        <div class="brand">VALÉNOΛ</div>
+<section class="gateway">
+  <h2 class="seo-h2">
+    VALÉNOΛ Global Fashion Model Agency
+  </h2>
+          <div class="brand">VALÉNOΛ</div>
 
         <div class="tagline">GLOBAL MODEL AGENCY</div>
 
