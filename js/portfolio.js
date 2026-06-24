@@ -1,27 +1,28 @@
 // portfolio.js
-const videoObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const video = entry.target;
+document.addEventListener("DOMContentLoaded", () => {
+  
+  /* ==========================================
+   動画の遅延読み込み＆再生管理（スマホ軽量化対策）
+  ========================================== */
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
 
-    if (entry.isIntersecting) {
-      // 画面に入ったら読み込みを開始して再生
-      if (video.dataset.src) {
-        video.src = video.dataset.src;
-        video.load();
+      if (entry.isIntersecting) {
+        if (video.dataset.src && !video.src) {
+          video.src = video.dataset.src;
+          video.load();
+        }
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+        if (video.src) {
+          video.removeAttribute("src");
+          video.load();
+        }
       }
-      video.play().catch(() => {});
-    } else {
-      // 画面から消えたら再生を止め、通信（バッファ）も完全に破棄してスマホを軽くする
-      video.pause();
-      if (video.src) {
-        video.dataset.src = video.src; // URLを退避
-        video.removeAttribute("src");  // 通信を切断
-        video.load();
-      }
-    }
-  });
-},{ threshold: 0.1 }); // 少しでも画面に入ったらすぐ再生（0.3から0.1に変更）
-
+    });
+  }, { threshold: 0.1 });
 
   const galleryContainer = document.getElementById("galleryContainer");
   const thumbnailContainer = document.getElementById("thumbnailContainer");
@@ -35,163 +36,105 @@ const videoObserver = new IntersectionObserver((entries) => {
   const modalClose = document.getElementById("modalClose");
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
-  document.getElementById("link-concept")?.addEventListener("click", () => {
-  gtag('event', 'click_concept');
-});
 
-document.getElementById("link-career")?.addEventListener("click", () => {
-  gtag('event', 'click_career');
-});
+  // Google Analytics イベント
+  document.getElementById("link-concept")?.addEventListener("click", () => { gtag('event', 'click_concept'); });
+  document.getElementById("link-career")?.addEventListener("click", () => { gtag('event', 'click_career'); });
+  document.getElementById("link-portfolio")?.addEventListener("click", () => { gtag('event', 'click_portfolio'); });
 
-document.getElementById("link-portfolio")?.addEventListener("click", () => {
-  gtag('event', 'click_portfolio');
-});
-
-  let itemsList = [];
+  // 全アイテムを管理するマスター配列（モーダル用）
+  let itemsMasterList = [];
   let currentIndex = 0;
-/* ==========================================
- スクロール
-========================================== */
-let galleryPos = 0;
-let galleryVelocity = 0;
 
-const friction = 0.94;
-const speed = 0.0010;
+  /* ==========================================
+   慣性スクロール（PC用）
+  ========================================== */
+  let galleryPos = 0;
+  let galleryVelocity = 0;
+  const friction = 0.94;
+  const speed = 0.0010;
+  let isAnimating = false;
 
-let isAnimating = false;
+  function smoothLoop() {
+    if (!isAnimating) return;
+    galleryVelocity *= friction;
+    galleryPos += galleryVelocity * 120;
 
-function smoothLoop(){
+    const maxX = galleryContainer.scrollWidth - galleryContainer.clientWidth;
+    galleryPos = Math.max(0, Math.min(maxX, galleryPos));
+    galleryContainer.scrollLeft = galleryPos;
 
-  if(!isAnimating) return;
-
-  galleryVelocity *= friction;
-  galleryPos += galleryVelocity * 120;
-
-  const maxX =
-    galleryContainer.scrollWidth -
-    galleryContainer.clientWidth;
-
-  galleryPos = Math.max(0, Math.min(maxX, galleryPos));
-  galleryContainer.scrollLeft = galleryPos;
-
-  if(Math.abs(galleryVelocity) < 0.01){
-    isAnimating = false;
-    return;
-  }
-
-  requestAnimationFrame(smoothLoop);
-}
-
-document.addEventListener("wheel",(e)=>{
-
-  if (window.innerWidth <= 768) return;
-
-  const rect = galleryContainer.getBoundingClientRect();
-  const inGallery =
-    rect.top < window.innerHeight &&
-    rect.bottom > 0;
-
-  if (inGallery){
-
-    e.preventDefault();
-
-    galleryVelocity += e.deltaY * speed;
-
-    if(!isAnimating){
-      isAnimating = true;
-      requestAnimationFrame(smoothLoop);
+    if (Math.abs(galleryVelocity) < 0.01) {
+      isAnimating = false;
+      return;
     }
-
+    requestAnimationFrame(smoothLoop);
   }
 
-},{ passive:false });
-// galleryContainer.addEventListener("wheel", function(e) {
+  document.addEventListener("wheel", (e) => {
+    if (window.innerWidth <= 768) return;
+    const rect = galleryContainer.getBoundingClientRect();
+    const inGallery = rect.top < window.innerHeight && rect.bottom > 0;
 
-//   if (window.innerWidth > 768) {
+    if (inGallery) {
+      e.preventDefault();
+      galleryVelocity += e.deltaY * speed;
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(smoothLoop);
+      }
+    }
+  }, { passive: false });
 
-//     const rect = galleryContainer.getBoundingClientRect();
-//     const isInside = rect.top < window.innerHeight && rect.bottom > 0;
-
-//     if (!isInside) return;
-
-//     e.preventDefault();
-//     galleryContainer.scrollLeft += e.deltaY * 1.2;
-//   }
-
-// }, { passive: false });
-  /* ================= モーダル ================= */
-
-  function bindGalleryClick() {
-    itemsList = [
-  ...new Map(
-    [...galleryContainer.children, ...thumbnailContainer.children]
-      .map(el => [(el.dataset.full || el.src), el])
-  ).values()
-];
-
-    itemsList.forEach((el, idx) => {
-     el.onclick = () => {
-  currentIndex = idx;
-  openModal(idx);
-
-  gtag('event', 'open_modal', {
-    image_index: idx,
-    content_type: el.tagName
-  });
-};
-    });
+  /* ==========================================
+   モーダル処理
+  ========================================== */
+  function bindGalleryClick(element, indexInMaster) {
+    element.onclick = () => {
+      currentIndex = indexInMaster;
+      openModal(currentIndex);
+      gtag('event', 'open_modal', { image_index: currentIndex, content_type: element.tagName });
+    };
   }
 
   function openModal(i) {
-  const el = itemsList[i];
-  modal.classList.add("show");
+    const elData = itemsMasterList[i];
+    if (!elData) return;
 
-  modalImage.classList.remove("show");
-  modalVideo.classList.remove("show");
+    modal.classList.add("show");
+    modalImage.classList.remove("show");
+    modalVideo.classList.remove("show");
 
-  if (el.tagName === "IMG") {
-
-    modalImage.src = el.dataset.full || el.src;
-    modalImage.classList.add("show");
-    modalVideo.pause();
-
-  } else {
-
-    modalVideo.src = el.dataset.full || el.src;
-    modalVideo.classList.add("show");
-    modalVideo.play();
-
+    if (elData.tagName === "IMG") {
+      modalImage.src = elData.fullSrc;
+      modalImage.classList.add("show");
+      modalVideo.pause();
+    } else {
+      modalVideo.src = elData.fullSrc;
+      modalVideo.classList.add("show");
+      modalVideo.play();
+    }
   }
-}
 
-function closeModal() {
-  modal.classList.remove("show");
-  modalVideo.pause();
+  function closeModal() {
+    modal.classList.remove("show");
+    modalVideo.pause();
+    modalImage.removeAttribute("src");
+    modalVideo.removeAttribute("src");
+    gtag('event', 'close_modal');
+  }
 
-  modalImage.removeAttribute("src");
-  modalVideo.removeAttribute("src");
-
-  gtag('event', 'close_modal');
-}
   function changeModalImage(dir) {
-    const max = itemsList.length;
+    const max = itemsMasterList.length;
+    if (max === 0) return;
     currentIndex = (currentIndex + dir + max) % max;
     openModal(currentIndex);
   }
 
   modalClose.onclick = closeModal;
   modal.onclick = e => { if (e.target === modal) closeModal(); };
-prevBtn.onclick = e => {
-  e.stopPropagation();
-  changeModalImage(-1);
-  gtag('event', 'modal_prev');
-};
-
-nextBtn.onclick = e => {
-  e.stopPropagation();
-  changeModalImage(1);
-  gtag('event', 'modal_next');
-};
+  prevBtn.onclick = e => { e.stopPropagation(); changeModalImage(-1); gtag('event', 'modal_prev'); };
+  nextBtn.onclick = e => { e.stopPropagation(); changeModalImage(1); gtag('event', 'modal_next'); };
 
   document.addEventListener("keydown", e => {
     if (!modal.classList.contains("show")) return;
@@ -200,149 +143,170 @@ nextBtn.onclick = e => {
     if (e.key === "ArrowRight") changeModalImage(1);
   });
 
-  /* ================= 表示切替 ================= */
+  /* ==========================================
+   img.html 読み込み＆分割遅延表示（Lazy Load）
+  ========================================== */
+  fetch('/img.html')
+    .then(res => res.text())
+    .then(data => {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = data;
 
-  toggleBtn.addEventListener("click", () => {
-  horizontalGallery.classList.toggle("hidden");
-  thumbnailGallery.classList.toggle("hidden");
+      let items = Array.from(tempDiv.querySelectorAll("img, video"));
 
-  const squareContainer = document.getElementById("squareContainer");
-  squareContainer.classList.toggle("two-by-two");
-  squareContainer.classList.toggle("one-row");
+      // シャッフル
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
 
-  gtag('event', 'toggle_gallery_view');
-});
-
-/* ================= img.html 読み込み ================= */
-
-fetch('/img.html')
-  .then(res => res.text())
-  .then(data => {
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = data;
-
-    let items = Array.from(tempDiv.querySelectorAll("img, video"));
-
-/* ===============================
-シャッフル
-=============================== */
-
-    for (let i = items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
-    }
-
-/* ===============================
-共通：Lazy Load（遅延読み込み）処理
-=============================== */
-
-    const INITIAL_LOAD = 24; // 1回に読み込む件数
-    let horizontalLoadedCount = 0;
-    let thumbnailLoadedCount = 0;
-
-    // --- 横スクロール（Horizontal）用の読み込み関数 ---
-    function loadMoreHorizontal(items) {
-      if (horizontalLoadedCount >= items.length) return;
-
-      const fragment = document.createDocumentFragment();
-      const slice = items.slice(horizontalLoadedCount, horizontalLoadedCount + INITIAL_LOAD);
-
-      slice.forEach(el => {
-        const horizontalClone = el.cloneNode(true);
-        horizontalClone.classList.add("gallery-image");
-        horizontalClone.decoding = "async";
-
-        if (horizontalClone.tagName === "VIDEO") {
-horizontalClone.preload = "none"; // 初期状態では一切通信しない
-horizontalClone.autoplay = false;
-horizontalClone.muted = true;
-horizontalClone.loop = true;
-horizontalClone.playsInline = true;
-          videoObserver.observe(horizontalClone); // 画面に入ったら再生
-        } else {
-          horizontalClone.loading = "lazy";
+      // 事前処理：動画のsrcをdataset.srcに退避、かつマスターリストを作成
+      items.forEach((el, index) => {
+        let fullSrc = el.dataset.full || el.src;
+        if (el.tagName === "VIDEO" && el.src) {
+          el.dataset.src = el.src;
+          fullSrc = el.src;
+          el.removeAttribute("src");
         }
-
-        fragment.appendChild(horizontalClone);
+        
+        itemsMasterList.push({
+          tagName: el.tagName,
+          fullSrc: fullSrc
+        });
       });
 
-      galleryContainer.appendChild(fragment);
-      horizontalLoadedCount += slice.length;
-    }
-horizontalClone.dataset.src = horizontalClone.src;
-horizontalClone.removeAttribute("src");
+      const INITIAL_LOAD = 24; // 1回あたりの読み込み件数
+      let horizontalLoadedCount = 0;
+      let thumbnailLoadedCount = 0;
 
-    // --- グリッド（Thumbnail）用の読み込み関数 ★新設 ---
-    function loadMoreThumbnail(items) {
-      if (!thumbnailContainer || thumbnailLoadedCount >= items.length) return;
+      // --- 横スクロール（Horizontal）用追加関数 ---
+      function loadMoreHorizontal() {
+        if (horizontalLoadedCount >= items.length) return;
 
-      const fragment = document.createDocumentFragment();
-      const slice = items.slice(thumbnailLoadedCount, thumbnailLoadedCount + INITIAL_LOAD);
+        const fragment = document.createDocumentFragment();
+        // 【修正】独立したカウント（horizontalLoadedCount）からスライスする
+        const slice = items.slice(horizontalLoadedCount, horizontalLoadedCount + INITIAL_LOAD);
 
-      slice.forEach(el => {
-        const thumbClone = el.cloneNode(true);
-        thumbClone.classList.add("thumb-image");
-        thumbClone.decoding = "async";
+        slice.forEach((el, localIdx) => {
+          const globalIdx = horizontalLoadedCount + localIdx;
+          const horizontalClone = el.cloneNode(true);
+          horizontalClone.classList.add("gallery-image");
+          horizontalClone.decoding = "async";
 
-        if (thumbClone.tagName === "VIDEO") {
-          thumbClone.preload = "metadata";
-          thumbClone.autoplay = true;
-          thumbClone.muted = true;
-          thumbClone.loop = true;
-          thumbClone.playsInline = true;
-          videoObserver.observe(thumbClone); // 画面に入ったら再生
-        } else {
-          thumbClone.loading = "lazy";
+          if (horizontalClone.tagName === "VIDEO") {
+            horizontalClone.preload = "none";
+            horizontalClone.autoplay = false;
+            horizontalClone.muted = true;
+            horizontalClone.loop = true;
+            horizontalClone.playsInline = true;
+            videoObserver.observe(horizontalClone);
+          } else {
+            horizontalClone.loading = "lazy";
+          }
+
+          bindGalleryClick(horizontalClone, globalIdx);
+          fragment.appendChild(horizontalClone);
+        });
+
+        galleryContainer.appendChild(fragment);
+        horizontalLoadedCount += slice.length;
+      }
+
+      // --- グリッド（Thumbnail）用追加関数 ---
+      function loadMoreThumbnail() {
+        if (!thumbnailContainer || thumbnailLoadedCount >= items.length) return;
+
+        const fragment = document.createDocumentFragment();
+        // 【修正】独立したカウント（thumbnailLoadedCount）からスライスする
+        const slice = items.slice(thumbnailLoadedCount, thumbnailLoadedCount + INITIAL_LOAD);
+
+        slice.forEach((el, localIdx) => {
+          const globalIdx = thumbnailLoadedCount + localIdx;
+          const thumbClone = el.cloneNode(true);
+          thumbClone.classList.add("thumb-image");
+          thumbClone.decoding = "async";
+
+          if (thumbClone.tagName === "VIDEO") {
+            thumbClone.preload = "none";
+            thumbClone.autoplay = false;
+            thumbClone.muted = true;
+            thumbClone.loop = true;
+            thumbClone.playsInline = true;
+            videoObserver.observe(thumbClone);
+          } else {
+            thumbClone.loading = "lazy";
+          }
+
+          bindGalleryClick(thumbClone, globalIdx);
+          fragment.appendChild(thumbClone);
+        });
+
+        thumbnailContainer.appendChild(fragment);
+        thumbnailLoadedCount += slice.length;
+      }
+
+      // 初回分の描画（最初の24件をそれぞれ別々に読み出す）
+      loadMoreHorizontal();
+      loadMoreThumbnail();
+
+      // 初期状態で画面の高さが足りなければ追加する関数
+      function checkAndFillThumbnail() {
+        if (!thumbnailGallery.classList.contains("hidden")) {
+          // コンテナが画面いっぱい埋まるまでループして読み込む
+          while (
+            thumbnailLoadedCount < items.length && 
+            window.innerHeight + 300 >= document.documentElement.scrollHeight
+          ) {
+            loadMoreThumbnail();
+          }
         }
+      }
 
-        fragment.appendChild(thumbClone);
+      // 初回表示時の補填
+      setTimeout(checkAndFillThumbnail, 100);
+
+      /* ==========================================
+       表示切替
+      ========================================== */
+      toggleBtn.addEventListener("click", () => {
+        horizontalGallery.classList.toggle("hidden");
+        thumbnailGallery.classList.toggle("hidden");
+
+        const squareContainer = document.getElementById("squareContainer");
+        squareContainer.classList.toggle("two-by-two");
+        squareContainer.classList.toggle("one-row");
+
+        gtag('event', 'toggle_gallery_view');
+
+        // 表示を切り替えた瞬間、高さチェックをして130枚から確実に次を引き出す
+        setTimeout(checkAndFillThumbnail, 50);
       });
 
-      thumbnailContainer.appendChild(fragment);
-      thumbnailLoadedCount += slice.length;
-      
-      // クリックイベントを再バインド
-      bindGalleryClick();
-    }
+      // 横スクロール時の追加読み込み
+      galleryContainer.addEventListener("scroll", () => {
+        if (galleryContainer.scrollLeft + galleryContainer.clientWidth > galleryContainer.scrollWidth - 600) {
+          loadMoreHorizontal();
+        }
+      });
 
-    // 初回読み込み（まずは最初の24件だけ描写）
-    loadMoreHorizontal(items);
-    loadMoreThumbnail(items);
+      // 縦スクロール（サムネイル）時の追加読み込み（下部1000px手前で自動読み込み）
+      window.addEventListener("scroll", () => {
+        if (
+          window.innerHeight + window.scrollY >= 
+          document.documentElement.scrollHeight - 1000
+        ) {
+          loadMoreThumbnail();
+        }
+      });
 
-/* ===============================
-スクロール連動による追加読み込み
-=============================== */
+    })
+    .catch(err => {
+      console.error("img.html 読み込み失敗:", err);
+      if (galleryContainer) {
 
-    // 1. 横スクロール側のLazy Load
-    galleryContainer.addEventListener("scroll", () => {
-      if (
-        galleryContainer.scrollLeft +
-        galleryContainer.clientWidth >
-        galleryContainer.scrollWidth - 600
-      ) {
-        loadMoreHorizontal(items);
+        galleryContainer.innerHTML = "<p>Portfolioの読み込みに失敗しました。</p>";
       }
     });
-
-    // 2. サムネイル（画面全体スクロール）側のLazy Load ★新設
-    window.addEventListener("scroll", () => {
-      // 画面最下部から400px手前に来たら次の24件を読み込む
-      if (
-        window.innerHeight + window.scrollY >= 
-        document.documentElement.scrollHeight - 400
-      ) {
-        loadMoreThumbnail(items);
-      }
-    });
-
-    // 初回のクリックバインド
-    bindGalleryClick();
-
-  })
-.catch(err => {
-  console.error("img.html 読み込み失敗:", err);
-  galleryContainer.innerHTML = "<p>Portfolioの読み込みに失敗しました。</p>";
 });
 
 
