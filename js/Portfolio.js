@@ -210,7 +210,7 @@ nextBtn.onclick = e => {
   gtag('event', 'toggle_gallery_view');
 });
 
-  /* ================= img.html 読み込み ================= */
+/* ================= img.html 読み込み ================= */
 
 fetch('/img.html')
   .then(res => res.text())
@@ -231,98 +231,107 @@ fetch('/img.html')
     }
 
 /* ===============================
-サムネイル全部描画（二重ロード防止対応版）
+共通：Lazy Load（遅延読み込み）処理
 =============================== */
 
-// 画面幅が768px以下（モバイル環境）かどうかの判定
-const isMobile = window.innerWidth <= 768;
+    const INITIAL_LOAD = 24; // 1回に読み込む件数
+    let horizontalLoadedCount = 0;
+    let thumbnailLoadedCount = 0;
 
-const thumbFragment = document.createDocumentFragment();
-items.forEach(el => {
-
-  const thumbClone = el.cloneNode(true);
-  thumbClone.classList.add("thumb-image");
-  thumbClone.decoding = "async";
-  thumbClone.loading = "lazy"; // PC・モバイル共通で遅延読み込み
-
-  if (thumbClone.tagName === "VIDEO") {
-    // 【修正】PC・モバイル問わず、動くために必要な属性を強制セット
-    thumbClone.preload = "metadata";
-    thumbClone.autoplay = true;
-    thumbClone.muted = true;
-    thumbClone.loop = true;
-    thumbClone.playsInline = true;
-
-    // 【修正】画面に映ったら再生するようObserverに登録
-    if (typeof videoObserver !== 'undefined' && videoObserver.observe) {
-      videoObserver.observe(thumbClone);
-    }
-  }
-
-  thumbFragment.appendChild(thumbClone);
-});
-
-if (thumbnailContainer) {
-  thumbnailContainer.appendChild(thumbFragment);
-}
-
-/* ===============================
-Horizontal Lazy Load
-=============================== */
-
-    const INITIAL_LOAD = 24;
-    let loadedCount = 0;
-
-    function loadMore(items){
-
-      if(loadedCount >= items.length) return;
+    // --- 横スクロール（Horizontal）用の読み込み関数 ---
+    function loadMoreHorizontal(items) {
+      if (horizontalLoadedCount >= items.length) return;
 
       const fragment = document.createDocumentFragment();
-      const slice = items.slice(loadedCount, loadedCount + INITIAL_LOAD);
+      const slice = items.slice(horizontalLoadedCount, horizontalLoadedCount + INITIAL_LOAD);
 
       slice.forEach(el => {
-
         const horizontalClone = el.cloneNode(true);
         horizontalClone.classList.add("gallery-image");
+        horizontalClone.decoding = "async";
 
-        if(horizontalClone.tagName === "VIDEO"){
-          // 【修正】横スクロール側も動画の属性を確実にセット
+        if (horizontalClone.tagName === "VIDEO") {
           horizontalClone.preload = "metadata";
           horizontalClone.autoplay = true;
           horizontalClone.muted = true;
           horizontalClone.loop = true;
           horizontalClone.playsInline = true;
-          
-          // 画面に入った時に再生させる
-          videoObserver.observe(horizontalClone);
+          videoObserver.observe(horizontalClone); // 画面に入ったら再生
+        } else {
+          horizontalClone.loading = "lazy";
         }
 
         fragment.appendChild(horizontalClone);
-
       });
 
       galleryContainer.appendChild(fragment);
-      loadedCount += slice.length;
+      horizontalLoadedCount += slice.length;
     }
 
-    loadMore(items);
+    // --- グリッド（Thumbnail）用の読み込み関数 ★新設 ---
+    function loadMoreThumbnail(items) {
+      if (!thumbnailContainer || thumbnailLoadedCount >= items.length) return;
+
+      const fragment = document.createDocumentFragment();
+      const slice = items.slice(thumbnailLoadedCount, thumbnailLoadedCount + INITIAL_LOAD);
+
+      slice.forEach(el => {
+        const thumbClone = el.cloneNode(true);
+        thumbClone.classList.add("thumb-image");
+        thumbClone.decoding = "async";
+
+        if (thumbClone.tagName === "VIDEO") {
+          thumbClone.preload = "metadata";
+          thumbClone.autoplay = true;
+          thumbClone.muted = true;
+          thumbClone.loop = true;
+          thumbClone.playsInline = true;
+          videoObserver.observe(thumbClone); // 画面に入ったら再生
+        } else {
+          thumbClone.loading = "lazy";
+        }
+
+        fragment.appendChild(thumbClone);
+      });
+
+      thumbnailContainer.appendChild(fragment);
+      thumbnailLoadedCount += slice.length;
+      
+      // クリックイベントを再バインド
+      bindGalleryClick();
+    }
+
+    // 初回読み込み（まずは最初の24件だけ描写）
+    loadMoreHorizontal(items);
+    loadMoreThumbnail(items);
 
 /* ===============================
-スクロールLazy
+スクロール連動による追加読み込み
 =============================== */
 
+    // 1. 横スクロール側のLazy Load
     galleryContainer.addEventListener("scroll", () => {
-
-      if(
+      if (
         galleryContainer.scrollLeft +
         galleryContainer.clientWidth >
         galleryContainer.scrollWidth - 600
-      ){
-        loadMore(items);
+      ) {
+        loadMoreHorizontal(items);
       }
-
     });
 
+    // 2. サムネイル（画面全体スクロール）側のLazy Load ★新設
+    window.addEventListener("scroll", () => {
+      // 画面最下部から400px手前に来たら次の24件を読み込む
+      if (
+        window.innerHeight + window.scrollY >= 
+        document.documentElement.scrollHeight - 400
+      ) {
+        loadMoreThumbnail(items);
+      }
+    });
+
+    // 初回のクリックバインド
     bindGalleryClick();
 
   })
