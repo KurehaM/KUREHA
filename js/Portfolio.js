@@ -1,24 +1,27 @@
 // portfolio.js
-document.addEventListener("DOMContentLoaded", () => {
-    const videoObserver = new IntersectionObserver((entries)=>{
-
-  entries.forEach(entry=>{
-
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
     const video = entry.target;
 
-    if(entry.isIntersecting){
-
-      video.play().catch(()=>{});
-
-    }else{
-
+    if (entry.isIntersecting) {
+      // 画面に入ったら読み込みを開始して再生
+      if (video.dataset.src) {
+        video.src = video.dataset.src;
+        video.load();
+      }
+      video.play().catch(() => {});
+    } else {
+      // 画面から消えたら再生を止め、通信（バッファ）も完全に破棄してスマホを軽くする
       video.pause();
-
+      if (video.src) {
+        video.dataset.src = video.src; // URLを退避
+        video.removeAttribute("src");  // 通信を切断
+        video.load();
+      }
     }
-
   });
+},{ threshold: 0.1 }); // 少しでも画面に入ったらすぐ再生（0.3から0.1に変更）
 
-},{threshold:0.3});
 
   const galleryContainer = document.getElementById("galleryContainer");
   const thumbnailContainer = document.getElementById("thumbnailContainer");
@@ -251,11 +254,11 @@ fetch('/img.html')
         horizontalClone.decoding = "async";
 
         if (horizontalClone.tagName === "VIDEO") {
-          horizontalClone.preload = "metadata";
-          horizontalClone.autoplay = true;
-          horizontalClone.muted = true;
-          horizontalClone.loop = true;
-          horizontalClone.playsInline = true;
+horizontalClone.preload = "none"; // 初期状態では一切通信しない
+horizontalClone.autoplay = false;
+horizontalClone.muted = true;
+horizontalClone.loop = true;
+horizontalClone.playsInline = true;
           videoObserver.observe(horizontalClone); // 画面に入ったら再生
         } else {
           horizontalClone.loading = "lazy";
@@ -267,6 +270,8 @@ fetch('/img.html')
       galleryContainer.appendChild(fragment);
       horizontalLoadedCount += slice.length;
     }
+horizontalClone.dataset.src = horizontalClone.src;
+horizontalClone.removeAttribute("src");
 
     // --- グリッド（Thumbnail）用の読み込み関数 ★新設 ---
     function loadMoreThumbnail(items) {
@@ -339,7 +344,7 @@ fetch('/img.html')
   console.error("img.html 読み込み失敗:", err);
   galleryContainer.innerHTML = "<p>Portfolioの読み込みに失敗しました。</p>";
 });
-});
+
 
 /* ================= 動画自動再生 ================= */
 
