@@ -1,3 +1,4 @@
+// menu.js
 document.addEventListener("DOMContentLoaded", () => {
   const lang =
     new URLSearchParams(window.location.search).get("lang") ||

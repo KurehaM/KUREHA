@@ -1,3 +1,4 @@
+// contact-common.js
 document.addEventListener("DOMContentLoaded", () => {
   const contactTarget = document.getElementById("common-contact");
   if (!contactTarget) return;

@@ -1,3 +1,4 @@
+// portfolio.js
 document.addEventListener("DOMContentLoaded", () => {
     const videoObserver = new IntersectionObserver((entries)=>{
 
@@ -230,34 +231,49 @@ fetch('/img.html')
     }
 
 /* ===============================
-サムネイル全部描画
+サムネイル全部描画（二重ロード防止対応版）
 =============================== */
 
+// 画面幅が768px以下（モバイル環境）かどうかの判定
+const isMobile = window.innerWidth <= 768;
+
 const thumbFragment = document.createDocumentFragment();
-items.forEach(el=>{
+items.forEach(el => {
 
   const thumbClone = el.cloneNode(true);
-
   thumbClone.classList.add("thumb-image");
 
-thumbClone.decoding = "async";
-thumbClone.loading = "lazy";
+  thumbClone.decoding = "async";
 
-  if(thumbClone.tagName==="VIDEO"){
-    thumbClone.autoplay=true;
-    thumbClone.muted=true;
-    thumbClone.loop=true;
-    thumbClone.playsInline=true;
+  // ★重要：PC環境（非表示）のときはloadingをlazyにし、srcを後回しにする
+  if (!isMobile) {
+    thumbClone.loading = "lazy";
+  } else {
+    thumbClone.loading = "lazy"; // モバイルでも遅延読み込みを有効化
+  }
 
-    videoObserver.observe(thumbClone);
+  if (thumbClone.tagName === "VIDEO") {
+    // モバイル環境のときだけビデオを自動再生させる（PC側の非表示状態での通信を防ぐ）
+    if (isMobile) {
+      thumbClone.autoplay = true;
+      thumbClone.muted = true;
+      thumbClone.loop = true;
+      thumbClone.playsInline = true;
+      if (typeof videoObserver !== 'undefined' && videoObserver.observe) {
+        videoObserver.observe(thumbClone);
+      }
+    } else {
+      // PC環境では自動再生を無効にして通信を発生させない
+      thumbClone.autoplay = false;
+    }
   }
 
   thumbFragment.appendChild(thumbClone);
-
 });
 
-thumbnailContainer.appendChild(thumbFragment);
-
+if (thumbnailContainer) {
+  thumbnailContainer.appendChild(thumbFragment);
+}
 /* ===============================
 Horizontal Lazy Load
 =============================== */
