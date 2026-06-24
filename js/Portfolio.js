@@ -242,29 +242,20 @@ items.forEach(el => {
 
   const thumbClone = el.cloneNode(true);
   thumbClone.classList.add("thumb-image");
-
   thumbClone.decoding = "async";
-
-  // ★重要：PC環境（非表示）のときはloadingをlazyにし、srcを後回しにする
-  if (!isMobile) {
-    thumbClone.loading = "lazy";
-  } else {
-    thumbClone.loading = "lazy"; // モバイルでも遅延読み込みを有効化
-  }
+  thumbClone.loading = "lazy"; // PC・モバイル共通で遅延読み込み
 
   if (thumbClone.tagName === "VIDEO") {
-    // モバイル環境のときだけビデオを自動再生させる（PC側の非表示状態での通信を防ぐ）
-    if (isMobile) {
-      thumbClone.autoplay = true;
-      thumbClone.muted = true;
-      thumbClone.loop = true;
-      thumbClone.playsInline = true;
-      if (typeof videoObserver !== 'undefined' && videoObserver.observe) {
-        videoObserver.observe(thumbClone);
-      }
-    } else {
-      // PC環境では自動再生を無効にして通信を発生させない
-      thumbClone.autoplay = false;
+    // 【修正】PC・モバイル問わず、動くために必要な属性を強制セット
+    thumbClone.preload = "metadata";
+    thumbClone.autoplay = true;
+    thumbClone.muted = true;
+    thumbClone.loop = true;
+    thumbClone.playsInline = true;
+
+    // 【修正】画面に映ったら再生するようObserverに登録
+    if (typeof videoObserver !== 'undefined' && videoObserver.observe) {
+      videoObserver.observe(thumbClone);
     }
   }
 
@@ -274,6 +265,7 @@ items.forEach(el => {
 if (thumbnailContainer) {
   thumbnailContainer.appendChild(thumbFragment);
 }
+
 /* ===============================
 Horizontal Lazy Load
 =============================== */
@@ -286,23 +278,22 @@ Horizontal Lazy Load
       if(loadedCount >= items.length) return;
 
       const fragment = document.createDocumentFragment();
-
       const slice = items.slice(loadedCount, loadedCount + INITIAL_LOAD);
 
       slice.forEach(el => {
 
         const horizontalClone = el.cloneNode(true);
+        horizontalClone.classList.add("gallery-image");
 
         if(horizontalClone.tagName === "VIDEO"){
+          // 【修正】横スクロール側も動画の属性を確実にセット
+          horizontalClone.preload = "metadata";
           horizontalClone.autoplay = true;
           horizontalClone.muted = true;
           horizontalClone.loop = true;
           horizontalClone.playsInline = true;
-        }
-
-        horizontalClone.classList.add("gallery-image");
-
-        if(horizontalClone.tagName === "VIDEO"){
+          
+          // 画面に入った時に再生させる
           videoObserver.observe(horizontalClone);
         }
 
@@ -311,9 +302,7 @@ Horizontal Lazy Load
       });
 
       galleryContainer.appendChild(fragment);
-
       loadedCount += slice.length;
-
     }
 
     loadMore(items);
@@ -339,11 +328,11 @@ Horizontal Lazy Load
   })
 .catch(err => {
   console.error("img.html 読み込み失敗:", err);
-  galleryContainer.innerHTML = "<p>Portfolio loading failed.</p>";
+  galleryContainer.innerHTML = "<p>Portfolioの読み込みに失敗しました。</p>";
 });
-/* ================= 動画自動再生 ================= */
+});
 
-});
+/* ================= 動画自動再生 ================= */
 
 document.getElementById("link-contact")?.addEventListener("click", () => {
   gtag('event', 'click_contact');
