@@ -2,19 +2,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   
   /* ==========================================
-   動画の遅延読み込み＆再生管理（スマホ軽量化対策）
+   動画の遅延読み込み＆再生管理（スマホ軽量化・ガタつき防止対策）
   ========================================== */
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const video = entry.target;
 
       if (entry.isIntersecting) {
+        // 画面に入ったら動画ファイルを読み込んで再生
         if (video.dataset.src && !video.src) {
           video.src = video.dataset.src;
           video.load();
         }
         video.play().catch(() => {});
       } else {
+        // 画面から消えたら再生を止め、通信を解放
         video.pause();
         if (video.src) {
           video.removeAttribute("src");
@@ -22,7 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
-  }, { threshold: 0.1 });
+  }, { 
+    threshold: 0.05, // 画面に少しでも触れたら反応
+    rootMargin: "300px 0px 300px 0px" // 上下300pxの猶予を持たせて、ガタつきを完全に防止
+  });
 
   const galleryContainer = document.getElementById("galleryContainer");
   const thumbnailContainer = document.getElementById("thumbnailContainer");
@@ -42,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("link-career")?.addEventListener("click", () => { gtag('event', 'click_career'); });
   document.getElementById("link-portfolio")?.addEventListener("click", () => { gtag('event', 'click_portfolio'); });
 
-  // 全アイテムを管理するマスター配列（モーダル用）
   let itemsMasterList = [];
   let currentIndex = 0;
 
@@ -175,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
 
-      const INITIAL_LOAD = 24; // 1回あたりの読み込み件数
+      const INITIAL_LOAD = 24;
       let horizontalLoadedCount = 0;
       let thumbnailLoadedCount = 0;
 
@@ -184,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (horizontalLoadedCount >= items.length) return;
 
         const fragment = document.createDocumentFragment();
-        // 【修正】独立したカウント（horizontalLoadedCount）からスライスする
         const slice = items.slice(horizontalLoadedCount, horizontalLoadedCount + INITIAL_LOAD);
 
         slice.forEach((el, localIdx) => {
@@ -194,6 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
           horizontalClone.decoding = "async";
 
           if (horizontalClone.tagName === "VIDEO") {
+            // 【重要：高さ固定】srcがなくてもサイズを維持させ、ガタつきを防ぐ
+            horizontalClone.style.aspectRatio = "16 / 9"; 
             horizontalClone.preload = "none";
             horizontalClone.autoplay = false;
             horizontalClone.muted = true;
@@ -217,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!thumbnailContainer || thumbnailLoadedCount >= items.length) return;
 
         const fragment = document.createDocumentFragment();
-        // 【修正】独立したカウント（thumbnailLoadedCount）からスライスする
         const slice = items.slice(thumbnailLoadedCount, thumbnailLoadedCount + INITIAL_LOAD);
 
         slice.forEach((el, localIdx) => {
@@ -227,6 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
           thumbClone.decoding = "async";
 
           if (thumbClone.tagName === "VIDEO") {
+            // 【重要：高さ固定】動画読み込み前後でのサイズ変化を無くす
+            thumbClone.style.aspectRatio = "1 / 1"; // グリッドの形状（正方形なら1/1、元の動画比率なら16/9等に変更してください）
+            thumbClone.style.objectFit = "cover";
             thumbClone.preload = "none";
             thumbClone.autoplay = false;
             thumbClone.muted = true;
@@ -245,14 +252,13 @@ document.addEventListener("DOMContentLoaded", () => {
         thumbnailLoadedCount += slice.length;
       }
 
-      // 初回分の描画（最初の24件をそれぞれ別々に読み出す）
+      // 初回分の描画
       loadMoreHorizontal();
       loadMoreThumbnail();
 
       // 初期状態で画面の高さが足りなければ追加する関数
       function checkAndFillThumbnail() {
         if (!thumbnailGallery.classList.contains("hidden")) {
-          // コンテナが画面いっぱい埋まるまでループして読み込む
           while (
             thumbnailLoadedCount < items.length && 
             window.innerHeight + 300 >= document.documentElement.scrollHeight
@@ -262,7 +268,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // 初回表示時の補填
       setTimeout(checkAndFillThumbnail, 100);
 
       /* ==========================================
@@ -277,8 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
         squareContainer.classList.toggle("one-row");
 
         gtag('event', 'toggle_gallery_view');
-
-        // 表示を切り替えた瞬間、高さチェックをして130枚から確実に次を引き出す
         setTimeout(checkAndFillThumbnail, 50);
       });
 
@@ -289,11 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // 縦スクロール（サムネイル）時の追加読み込み（下部1000px手前で自動読み込み）
+      // 縦スクロール時の追加読み込み
       window.addEventListener("scroll", () => {
         if (
           window.innerHeight + window.scrollY >= 
-          document.documentElement.scrollHeight - 1000
+          document.documentElement.scrollHeight - 800
         ) {
           loadMoreThumbnail();
         }
