@@ -903,20 +903,20 @@ FIXED BACKGROUND UI
           setTimeout(() => {
             const loader = document.getElementById("loading-screen");
 
-      //       if (loader) {
-      //         loader.classList.add("loaded");
+            if (loader) {
+              loader.classList.add("loaded");
 
-      //         // ローダーのフェードアウト完了後
-      //         setTimeout(() => {
-      //           const langSelector = document.querySelector(".lang-selector");
-      //           if (langSelector) {
-      //             langSelector.classList.add("show");
-      //           }
-      //         }, 1800);
-      //       }
-      //     }, 2500);
-      //   });
-      // })();
+              // ローダーのフェードアウト完了後
+              setTimeout(() => {
+                const langSelector = document.querySelector(".lang-selector");
+                if (langSelector) {
+                  langSelector.classList.add("show");
+                }
+              }, 1800);
+            }
+          }, 2500);
+        });
+      })();
     </script>
   </body>
 </html>
