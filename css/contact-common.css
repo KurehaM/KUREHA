@@ -135,3 +135,29 @@ body::after {
   /* アニメーションの指定：2.0秒 / 滑らかな緩急（ease-out） */
   animation: blackFadeOut 2s ease-out 0.5s 1 normal both;
 }
+
+
+@media only screen and (max-width: 768px) {
+/* agency.html */
+  .fixed-contact-container {
+  padding: 0px 20px 80px 40px; /* 画面端から計算されたモードな余白 */
+  /* background: transparent; */
+  /* background: red; */
+}
+}
+@media only screen and (max-width: 768px) {
+/* kureha.html */
+  .fixed-contact-container {
+  padding: 0px 40px 80px 40px; /* 画面端から計算されたモードな余白 */
+  /* background: transparent; */
+  /* background: red; */
+}
+}
+@media only screen and (max-width: 768px) {
+/* portfolio.html */
+  .fixed-contact-container {
+  padding: 80px 50px 50px 40px; /* 画面端から計算されたモードな余白 */
+  /* background: transparent; */
+  /* background: red; */
+}
+}
