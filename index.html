@@ -225,6 +225,32 @@
           transform: translate3d(-50%, 0, 0);
         }
       }
+            @media only screen and (max-width: 768px) {
+             .loader-wrapper {
+        gap: 5px;
+        height: auto;
+margin-top: 100px;
+      }
+
+  .catchphrase-en {
+    margin-top: 20px;
+    line-height: 20px;
+        font-size: 0.6rem;
+        letter-spacing: 0.5em;
+        margin-bottom: 0px;
+      }
+}
+@media only screen and (min-width: 768px) {
+  .br-min-non {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .br-max-non {
+    display: none;
+  }
+}
+
     </style>
 <!-- CSP -->
 <meta
@@ -291,7 +317,7 @@
           <span class="catchphrase-ja">流行よりも残る美しさを</span>
           <br />
           <span class="catchphrase-en"
-            >Presence Beyond Trends.Beauty That Remains.</span
+            >Presence Beyond Trends.<br class="br-min-non">Beauty That Remains.</span
           >
         </div>
 
